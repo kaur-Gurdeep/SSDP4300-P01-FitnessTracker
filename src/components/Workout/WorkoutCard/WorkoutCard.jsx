@@ -1,6 +1,10 @@
 import styles from './WorkoutCard.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faWeightHanging } from '@fortawesome/free-solid-svg-icons';
+import {
+  faClock,
+  faWeightHanging,
+  faRunning,
+} from '@fortawesome/free-solid-svg-icons';
 
 const workout = {
   id: 1,
@@ -58,7 +62,7 @@ const workout = {
           time: 30,
         },
         {
-          distance: 1000,
+          distance: 2000,
           time: 30,
         },
         {
@@ -82,10 +86,28 @@ export default function WorkoutCard() {
     return workout.exercises.reduce(
       (total, exercise) =>
         total +
-        exercise.sets.reduce(
-          (setTotal, set) => setTotal + set.weight * set.reps,
-          0
-        ),
+        exercise.sets.reduce((setTotal, set) => {
+          if (exercise.type === 'strength') {
+            return setTotal + set.weight * set.reps;
+          } else {
+            return setTotal;
+          }
+        }, 0),
+      0
+    );
+  }
+
+  function calculateTotalDistance() {
+    return workout.exercises.reduce(
+      (total, exercise) =>
+        total +
+        exercise.sets.reduce((setTotal, set) => {
+          if (exercise.type === 'cardio') {
+            return setTotal + set.distance;
+          } else {
+            return setTotal;
+          }
+        }, 0),
       0
     );
   }
@@ -114,15 +136,19 @@ export default function WorkoutCard() {
         <h3>{workout.name}</h3>
         <button>...</button>
       </div>
-      <p className={styles.date}>{workout.date}</p>
+      <p className={styles.date}>Date: {workout.date}</p>
       <div className={styles.stats}>
         <p>
-          <FontAwesomeIcon icon={faClock} />
-          {calculateTotalDuration()}
+          <FontAwesomeIcon icon={faClock} /> {calculateTotalDuration()} mins
         </p>
         <p>
-          <FontAwesomeIcon icon={faWeightHanging} />
-          {calculateTotalWeight()}
+          <FontAwesomeIcon icon={faRunning} />{' '}
+          {calculateTotalDistance() > 1000
+            ? ` ${calculateTotalDistance() / 1000} km`
+            : ` ${calculateTotalDistance()} m`}
+        </p>
+        <p>
+          <FontAwesomeIcon icon={faWeightHanging} /> {calculateTotalWeight()} kg
         </p>
       </div>
       <div className={styles.exercises}>

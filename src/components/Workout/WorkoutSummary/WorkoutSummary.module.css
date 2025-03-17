@@ -1,4 +1,4 @@
-.workoutList {
+.workoutSummary {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -6,7 +6,7 @@
 }
 
 @media (min-width: 768px) {
-  .workoutList {
+  .workoutSummary {
     flex-direction: row;
     flex-wrap: wrap;
   }
