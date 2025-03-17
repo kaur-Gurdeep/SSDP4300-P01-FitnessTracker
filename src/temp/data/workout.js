@@ -1,4 +1,4 @@
-const workout = {
+const initialWorkoutData = {
   id: 1,
   date: '2025-03-16',
   name: 'Workout 1',
@@ -66,4 +66,4 @@ const workout = {
   ],
 };
 
-export default workout;
+export { initialWorkoutData };

@@ -10,13 +10,8 @@ import About from './components/About';
 import Contact from './components/Contact';
 import WorkoutSummary from './components/Workout/WorkoutSummary/WorkoutSummary';
 import WorkoutCreate from './components/Workout/WorkoutCreate/WorkoutCreate';
-
+import { initialWorkoutData } from './temp/data/workout.js';
 function App() {
-  const initialState = {
-    title: 'My Workout',
-    exercises: [],
-  };
-
   const reducer = (state, action) => {
     switch (action.type) {
       case 'addExercise':
@@ -29,7 +24,7 @@ function App() {
     }
   };
 
-  const [workout, dispatch] = useReducer(reducer, initialState);
+  const [workout, dispatch] = useReducer(reducer, initialWorkoutData);
 
   return (
     <Router>
@@ -41,7 +36,10 @@ function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/workouts' element={<WorkoutSummary />} />
+          <Route
+            path='/workouts'
+            element={<WorkoutSummary workout={workout} dispatch={dispatch} />}
+          />
           <Route
             path='/workout/create'
             element={<WorkoutCreate workout={workout} dispatch={dispatch} />}

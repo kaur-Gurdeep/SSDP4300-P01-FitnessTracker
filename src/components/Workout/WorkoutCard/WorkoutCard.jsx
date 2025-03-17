@@ -6,7 +6,7 @@ import {
   faRunning,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function WorkoutCard({ workout }) {
+export default function WorkoutCard({ workout, dispatch }) {
   function calculateTotalDuration() {
     return workout.exercises.reduce(
       (total, exercise) => total + exercise.duration,
