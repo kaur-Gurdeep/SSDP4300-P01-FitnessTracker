@@ -1,0 +1,13 @@
+.workoutList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .workoutList {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

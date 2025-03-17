@@ -1,0 +1,48 @@
+.workoutCard {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.workoutHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date {
+  font-size: 14px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.exercises {
+}
+
+.exercises table {
+  width: 100%;
+}
+
+.exercises table th {
+  text-align: left;
+}
+
+.exercises table td {
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .workoutCard {
+    width: 50%;
+  }
+}

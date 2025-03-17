@@ -3,7 +3,7 @@ import WorkoutList from './components/Workout/WorkoutList/WorkoutList';
 
 function App() {
   return (
-    <main className='App'>
+    <main className='app'>
       <WorkoutList />
     </main>
   );
