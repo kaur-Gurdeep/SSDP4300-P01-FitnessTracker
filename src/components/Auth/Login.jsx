@@ -16,7 +16,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Logged In:", formData);
-    navigate("/dashboard"); // Redirect to Dashboard after login
+    // navigate("/dashboard"); // Redirect to Dashboard after login
   };
 
   return (
