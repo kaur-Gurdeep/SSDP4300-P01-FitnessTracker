@@ -10,6 +10,7 @@ const workout = {
     {
       id: 1,
       name: 'Exercise 1',
+      type: 'strength',
       duration: 30,
       sets: [
         {
@@ -29,6 +30,7 @@ const workout = {
     {
       id: 2,
       name: 'Exercise 2',
+      type: 'strength',
       duration: 30,
       sets: [
         {
@@ -42,6 +44,26 @@ const workout = {
         {
           reps: 10,
           weight: 100,
+        },
+      ],
+    },
+    {
+      id: 3,
+      name: 'Exercise 3',
+      type: 'cardio',
+      duration: 30,
+      sets: [
+        {
+          distance: 1000,
+          time: 30,
+        },
+        {
+          distance: 1000,
+          time: 30,
+        },
+        {
+          distance: 1000,
+          time: 30,
         },
       ],
     },
@@ -69,11 +91,21 @@ export default function WorkoutCard() {
   }
 
   function calculateBestSet(exercise) {
-    return exercise.sets.reduce(
-      (bestSet, set) =>
-        set.weight * set.reps > bestSet.weight * bestSet.reps ? set : bestSet,
-      { weight: 0, reps: 0 }
-    );
+    if (exercise.type === 'strength') {
+      return exercise.sets.reduce(
+        (bestSet, set) =>
+          set.weight * set.reps > bestSet.weight * bestSet.reps ? set : bestSet,
+        { weight: 0, reps: 0 }
+      );
+    } else if (exercise.type === 'cardio') {
+      return exercise.sets.reduce(
+        (bestSet, set) =>
+          set.distance * set.time > bestSet.distance * bestSet.time
+            ? set
+            : bestSet,
+        { distance: 0, time: 0 }
+      );
+    }
   }
 
   return (
@@ -105,10 +137,18 @@ export default function WorkoutCard() {
             {workout.exercises.map((exercise) => (
               <tr key={exercise.id}>
                 <td>{exercise.name}</td>
-                <td>
-                  {calculateBestSet(exercise).weight}kg x{' '}
-                  {calculateBestSet(exercise).reps} reps
-                </td>
+                {exercise.type === 'strength' && (
+                  <td>
+                    {calculateBestSet(exercise).weight}kg x{' '}
+                    {calculateBestSet(exercise).reps} reps
+                  </td>
+                )}
+                {exercise.type === 'cardio' && (
+                  <td>
+                    {calculateBestSet(exercise).distance}m x{' '}
+                    {calculateBestSet(exercise).time} s
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
