@@ -142,6 +142,10 @@
   display: inline-block;
   text-align: center;
 }
+.right-h .btn {
+  color: black;
+  background-color: white;
+}
 
 .right-h > .btn {
   position: absolute;
