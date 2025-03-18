@@ -6,7 +6,7 @@ import {
   faRunning,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function WorkoutCard({ workout, dispatch }) {
+export default function WorkoutCard({ workout }) {
   function calculateTotalDuration() {
     return workout.exercises.reduce(
       (total, exercise) => total + exercise.duration,
@@ -62,13 +62,30 @@ export default function WorkoutCard({ workout, dispatch }) {
     }
   }
 
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('en-US', {
+      dateStyle: 'full',
+    }).format(date);
+  }
+
+  function formatTime(dateString) {
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('en-US', {
+      timeStyle: 'short',
+    }).format(date);
+  }
+
   return (
     <div className={styles.workoutCard}>
       <div className={styles.workoutHeader}>
         <h3>{workout.name}</h3>
         <button>...</button>
       </div>
-      <p className={styles.date}>Date: {workout.date}</p>
+      <div className={styles.dateTime}>
+        <p className={styles.date}>{formatDate(workout.date)}</p>
+        <p className={styles.time}>{formatTime(workout.date)}</p>
+      </div>
       <div className={styles.stats}>
         <p>
           <FontAwesomeIcon icon={faClock} /> {calculateTotalDuration()} mins

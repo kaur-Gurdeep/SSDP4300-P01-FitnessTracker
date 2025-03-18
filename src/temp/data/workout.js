@@ -1,7 +1,7 @@
 const initialWorkoutData = [
   {
     id: 1,
-    date: '2025-03-16',
+    date: '2025-03-16T10:30:00.000Z', // Morning workout
     name: 'Workout 1',
     exercises: [
       {
@@ -68,7 +68,7 @@ const initialWorkoutData = [
   },
   {
     id: 2,
-    date: '2025-03-17',
+    date: '2025-03-17T16:45:00.000Z', // Afternoon workout
     name: 'Workout 2',
     exercises: [
       {
@@ -115,13 +115,13 @@ const initialWorkoutData = [
   },
   {
     id: 3,
-    date: '2025-03-18',
+    date: '2025-03-18T07:15:00.000Z', // Early morning workout
     name: 'Workout 3',
     exercises: [],
   },
   {
     id: 4,
-    date: '2025-03-19',
+    date: '2025-03-19T19:30:00.000Z', // Evening workout
     name: 'Workout 4',
     exercises: [],
   },

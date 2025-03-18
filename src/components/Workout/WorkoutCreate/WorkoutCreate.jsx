@@ -13,7 +13,7 @@ const exercises = [
   { id: 'cycling', name: 'Cycling', type: 'Cardio', sets: [] },
 ];
 
-export default function WorkoutCreate({ workouts, dispatch }) {
+export default function WorkoutCreate({ dispatch }) {
   const [workoutName, setWorkoutName] = useState('');
   const [selectedExerciseId, setSelectedExerciseId] = useState('');
   const [workoutExercises, setWorkoutExercises] = useState([]);
@@ -50,7 +50,7 @@ export default function WorkoutCreate({ workouts, dispatch }) {
       return;
     }
 
-    // Create the complete workout object
+    // Create the workout object without ID and date - reducer will handle those
     const newWorkout = {
       name: workoutName,
       exercises: workoutExercises,

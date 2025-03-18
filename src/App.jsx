@@ -18,11 +18,11 @@ function App() {
       case 'addExercise':
         return state; // We'll handle this in the component state instead
       case 'addWorkout':
-        // Create a new workout with a proper ID and date
+        // Create a new workout with a proper ID and store full datetime
         const newWorkout = {
           ...action.payload,
           id: state.length + 1,
-          date: new Date().toISOString().split('T')[0], // Format as YYYY-MM-DD
+          date: new Date().toISOString(), // Store full datetime in ISO format
         };
         return [...state, newWorkout];
       default:
@@ -45,11 +45,11 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route
             path='/workouts'
-            element={<WorkoutHistory workouts={workouts} dispatch={dispatch} />}
+            element={<WorkoutHistory workouts={workouts} />}
           />
           <Route
             path='/workout/create'
-            element={<WorkoutCreate workouts={workouts} dispatch={dispatch} />}
+            element={<WorkoutCreate dispatch={dispatch} />}
           />
         </Routes>
         <Footer />
