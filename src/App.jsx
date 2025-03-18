@@ -11,24 +11,26 @@ import Contact from './components/Contact';
 import WorkoutHistory from './components/Workout/WorkoutHistory/WorkoutHistory';
 import WorkoutCreate from './components/Workout/WorkoutCreate/WorkoutCreate';
 import { initialWorkoutData } from './temp/data/workout.js';
+
 function App() {
   const reducer = (state, action) => {
     switch (action.type) {
       case 'addExercise':
-        return {
-          ...state,
-          exercises: [...state.exercises, action.payload],
-        };
+        return state; // We'll handle this in the component state instead
       case 'addWorkout':
-        return {
-          ...state,
-          workouts: [...state.workouts, action.payload],
+        // Create a new workout with a proper ID and date
+        const newWorkout = {
+          ...action.payload,
+          id: state.length + 1,
+          date: new Date().toISOString().split('T')[0], // Format as YYYY-MM-DD
         };
+        return [...state, newWorkout];
       default:
         return state;
     }
   };
 
+  // Initialize with the array directly
   const [workouts, dispatch] = useReducer(reducer, initialWorkoutData);
 
   return (

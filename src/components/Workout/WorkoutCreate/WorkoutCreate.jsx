@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './WorkoutCreate.module.css';
-import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { faSquareCheck, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect } from 'react';
 
 const exercises = [
   { id: 'bench-press', name: 'Bench Press', type: 'Strength', sets: [] },
@@ -14,19 +14,54 @@ const exercises = [
 ];
 
 export default function WorkoutCreate({ workouts, dispatch }) {
-  const [selectedExerciseId, setSelectedExerciseId] = useState('');
   const [workoutName, setWorkoutName] = useState('');
+  const [selectedExerciseId, setSelectedExerciseId] = useState('');
+  const [workoutExercises, setWorkoutExercises] = useState([]);
+
+  // Update workout name effect
+  useEffect(() => {
+    // No need to update the workout object on every name change
+    // We'll create the final workout object only when submitting
+  }, [workoutName]);
+
+  const addExerciseToWorkout = () => {
+    if (!selectedExerciseId) return;
+
+    const exerciseToAdd = exercises.find((ex) => ex.id === selectedExerciseId);
+    if (exerciseToAdd) {
+      // Add a copy of the exercise to prevent modifying the original
+      setWorkoutExercises([
+        ...workoutExercises,
+        { ...exerciseToAdd, sets: [] },
+      ]);
+      setSelectedExerciseId(''); // Reset selection
+    }
+  };
+
+  const removeExerciseFromWorkout = (exerciseId) => {
+    setWorkoutExercises(workoutExercises.filter((ex) => ex.id !== exerciseId));
+  };
 
   const createWorkout = (e) => {
     e.preventDefault();
+
+    if (!workoutName.trim() || workoutExercises.length === 0) {
+      alert('Please provide a workout name and at least one exercise');
+      return;
+    }
+
+    // Create the complete workout object
     const newWorkout = {
-      id: workouts.length + 1,
-      date: new Date().toISOString(),
       name: workoutName,
-      exercises: [],
+      exercises: workoutExercises,
     };
+
+    // Dispatch to add the workout to the global state
     dispatch({ type: 'addWorkout', payload: newWorkout });
+
+    // Reset form
     setWorkoutName('');
+    setWorkoutExercises([]);
   };
 
   return (
@@ -46,15 +81,9 @@ export default function WorkoutCreate({ workouts, dispatch }) {
             value={workoutName}
             onChange={(e) => setWorkoutName(e.target.value)}
           />
-          {/* Finish Button */}
-          <button
-            type='submit'
-            className={styles.createBtn}
-            onClick={createWorkout}
-          >
-            <FontAwesomeIcon icon={faSquareCheck} />
-          </button>
         </div>
+
+        {/* Exercise Selector */}
         <div className={styles.exerciseSelector}>
           <select
             name='exercise'
@@ -70,36 +99,48 @@ export default function WorkoutCreate({ workouts, dispatch }) {
               </option>
             ))}
           </select>
+          <button
+            type='button'
+            className={styles.addBtn}
+            onClick={addExerciseToWorkout}
+          >
+            <FontAwesomeIcon icon={faSquareCheck} />
+          </button>
         </div>
-        <div className={styles.exerciseContainer}>
-          {selectedExerciseId && (
-            <div className={styles.exerciseForm}>
-              <p>Set {selectedExercise.sets.length + 1}</p>
-              <label htmlFor='reps' hidden>
-                Reps
-              </label>
-              <input
-                type='number'
-                placeholder='Reps'
-                value={
-                  selectedExercise.sets[selectedExercise.sets.length - 1].reps
-                }
-              />
-              <label htmlFor='weight' hidden>
-                Weight
-              </label>
-              <input
-                type='number'
-                placeholder='Weight'
-                value={
-                  selectedExercise.sets[selectedExercise.sets.length - 1].weight
-                }
-              />
-              <button type='submit' className={styles.addBtn}>
-                <FontAwesomeIcon icon={faSquareCheck} />
-              </button>
-            </div>
+
+        {/* Display selected exercises */}
+        <div className={styles.selectedExercises}>
+          <h3>Selected Exercises</h3>
+          {workoutExercises.length === 0 ? (
+            <p>No exercises added yet</p>
+          ) : (
+            <ul>
+              {workoutExercises.map((exercise) => (
+                <li key={`${exercise.id}-${Math.random()}`}>
+                  {exercise.name} - {exercise.type}
+                  <button
+                    type='button'
+                    onClick={() => removeExerciseFromWorkout(exercise.id)}
+                    className={styles.removeBtn}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </li>
+              ))}
+            </ul>
           )}
+        </div>
+
+        {/* Create Workout Button */}
+        <div className={styles.formActions}>
+          <button
+            type='submit'
+            className={styles.createBtn}
+            onClick={createWorkout}
+            disabled={!workoutName.trim() || workoutExercises.length === 0}
+          >
+            Create Workout
+          </button>
         </div>
       </form>
     </div>
