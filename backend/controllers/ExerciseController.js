@@ -48,7 +48,7 @@ exports.Exercise = async function (req, res) {
         return res.json(exercise);
       }
       // Currently, only sends HTML as response
-      res.send(`<h1>${exercise.data.name}</h1><p>${exercise.data.instructions}</p>`);
+      res.send(`<h1>${exercise.name}</h1><p>${exercise.instructions}</p>`);
     } else {
       throw new Error('No exercises found');
     }
