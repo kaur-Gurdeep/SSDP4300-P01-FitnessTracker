@@ -16,21 +16,20 @@ function App() {
   const reducer = (state, action) => {
     switch (action.type) {
       case 'addExercise':
-        return state; // We'll handle this in the component state instead
-      case 'addWorkout':
-        // Create a new workout with a proper ID and store full datetime
+        return state;
+      case 'addWorkout': {
         const newWorkout = {
           ...action.payload,
           id: state.length + 1,
-          date: new Date().toISOString(), // Store full datetime in ISO format
+          date: new Date().toISOString(),
         };
         return [...state, newWorkout];
+      }
       default:
         return state;
     }
   };
 
-  // Initialize with the array directly
   const [workouts, dispatch] = useReducer(reducer, initialWorkoutData);
 
   return (
