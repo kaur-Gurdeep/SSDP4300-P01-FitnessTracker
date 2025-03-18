@@ -8,7 +8,7 @@ import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import About from './components/About';
 import Contact from './components/Contact';
-import WorkoutSummary from './components/Workout/WorkoutSummary/WorkoutSummary';
+import WorkoutHistory from './components/Workout/WorkoutHistory/WorkoutHistory';
 import WorkoutCreate from './components/Workout/WorkoutCreate/WorkoutCreate';
 import { initialWorkoutData } from './temp/data/workout.js';
 function App() {
@@ -19,12 +19,17 @@ function App() {
           ...state,
           exercises: [...state.exercises, action.payload],
         };
+      case 'addWorkout':
+        return {
+          ...state,
+          workouts: [...state.workouts, action.payload],
+        };
       default:
         return state;
     }
   };
 
-  const [workout, dispatch] = useReducer(reducer, initialWorkoutData);
+  const [workouts, dispatch] = useReducer(reducer, initialWorkoutData);
 
   return (
     <Router>
@@ -38,11 +43,11 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route
             path='/workouts'
-            element={<WorkoutSummary workout={workout} dispatch={dispatch} />}
+            element={<WorkoutHistory workouts={workouts} dispatch={dispatch} />}
           />
           <Route
             path='/workout/create'
-            element={<WorkoutCreate workout={workout} dispatch={dispatch} />}
+            element={<WorkoutCreate workouts={workouts} dispatch={dispatch} />}
           />
         </Routes>
         <Footer />
