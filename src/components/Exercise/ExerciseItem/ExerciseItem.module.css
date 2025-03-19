@@ -1,0 +1,38 @@
+.exerciseItem {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+.exerciseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.exerciseHeader button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+  transition: 0.3s;
+}
+
+.exerciseHeader button:hover {
+  color: var(--orange);
+}
+.setHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.setHeader div {
+  display: flex;
+  gap: 10px;
+}
