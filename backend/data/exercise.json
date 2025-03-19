@@ -16,5 +16,11 @@
     "name": "leg press",
     "type": "muscle",
     "recipe": ["reps", "weight"]
+  },
+  {
+    "id": "4",
+    "name": "jumping jack",
+    "type": "muscle",
+    "recipe": ["reps", "time"]
   }
 ]
