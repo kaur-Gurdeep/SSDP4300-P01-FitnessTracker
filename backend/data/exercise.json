@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "name": "bench press",
+    "type": "muscle",
+    "recipe": ["reps", "weight"]
+  },
+  {
+    "id": "2",
+    "name": "run",
+    "type": "cardio",
+    "recipe": ["distance", "time"]
+  },
+  {
+    "id": "3",
+    "name": "leg press",
+    "type": "muscle",
+    "recipe": ["reps", "weight"]
+  }
+]
