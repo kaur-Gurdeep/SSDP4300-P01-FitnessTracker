@@ -182,6 +182,82 @@
   top: 10rem;
 }
 
+/* Review Section*/
+.reviews-section {
+  position: relative;
+  overflow: hidden;
+  margin-top: 5rem;
+  padding: 1rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reviews-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 1rem;
+}
+
+.reviewer-name {
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  color: white;
+  min-width: 250px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 1rem;
+  z-index: 2;
+}
+
+.nav-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-button.left {
+  margin-right: 0.5rem;
+}
+
+.nav-button.right {
+  margin-left: 0.5rem;
+}
+
+.nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 /************** Footer styles **************/
 footer {
   margin-top: auto;
@@ -271,6 +347,25 @@ footer {
     position: relative;
     top: 2rem;
     border-radius: 8px;
+  }
+  .review-card {
+    font-size: 1rem;
+    min-width: 200px;
+    padding: 0.5rem;
+  }
+
+  .reviewer-name {
+    font-size: 0.9rem;
+  }
+  .nav-button {
+    font-size: 1.2rem;
+    padding: 8px;
+  }
+  .nav-button.left {
+    left: 5px;
+  }
+  .nav-button.right {
+    right: 5px;
   }
 }
 @media (max-width: 992px) {
