@@ -9,6 +9,7 @@ import Register from "./components/Auth/Register";
 import About from "./components/About";
 import Contact from "./components/Contact";
 
+
 function App() {
   
   return (
