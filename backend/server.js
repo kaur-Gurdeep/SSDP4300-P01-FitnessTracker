@@ -17,6 +17,10 @@ const API_GATEWAY_URL = process.env.API_GATEWAY_URL || 'http://localhost';
 // Routes/routers
 const exerciseRouter = require('./routers/exerciseRouter');
 app.use('/exercises', exerciseRouter);
+const userRouter = require('./routers/userRouter');
+app.use('/users', userRouter);
+const workoutRouter = require('./routers/workoutRouter');
+app.use('/workouts', workoutRouter);
 
 // Add fallback route
 

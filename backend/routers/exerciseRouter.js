@@ -5,8 +5,10 @@ const ExerciseController = require('../controllers/ExerciseController');
 // Express and Controllers
 const exerciseRouter = express.Router();
 
-exerciseRouter.get('/', ExerciseController.Exercises);
-exerciseRouter.get('/:name', ExerciseController.Exercise);
+exerciseRouter.get('/ninjas/', ExerciseController.APIExercises);
+exerciseRouter.get('/ninjas/:name', ExerciseController.APIExercise);
+exerciseRouter.get('/:exerciseId', ExerciseController.Exercise);
+exerciseRouter.get('/type/:exerciseType', ExerciseController.ExercisesByType);
 // exerciseRouter.get('/:name{/:type}{/:muscle}{/:difficulty}', ExerciseController.Exercise);
 // exerciseRouter.get('/:name/:type?/:muscle?/:difficulty?', ExerciseController.Exercise);
 

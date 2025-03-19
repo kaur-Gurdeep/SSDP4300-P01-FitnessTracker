@@ -12,6 +12,7 @@ import WorkoutHistory from './components/Workout/WorkoutHistory/WorkoutHistory';
 import WorkoutCreate from './components/Workout/WorkoutCreate/WorkoutCreate';
 import { initialWorkoutData } from './temp/data/workout.js';
 
+
 function App() {
   const reducer = (state, action) => {
     switch (action.type) {
