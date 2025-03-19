@@ -1,0 +1,11 @@
+{
+  "leg press": {
+    "type": "muscle"
+  },
+  "run": {
+    "type": "cardio"
+  },
+  "bench press": {
+    "type": "muscle"
+  }
+}

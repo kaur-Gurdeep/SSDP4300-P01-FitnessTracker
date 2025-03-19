@@ -2,7 +2,7 @@ require('dotenv').config();
 const axios = require('axios');
 // const { urlencoded } = require('express');
 
-// API Ninjas
+// Ninjas API
 const API_NINJAS_URL = process.env.API_NINJAS_URL;
 const X_API_KEY = process.env.X_API_KEY;
 

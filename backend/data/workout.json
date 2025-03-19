@@ -1,0 +1,22 @@
+{
+  "workout1": {
+    "id": "1",
+    "exercise": "bench press",
+    "user": "user1"
+  },
+  "workout2": {
+    "id": "2",
+    "exercise": "run",
+    "user": "user1"
+  },
+  "workout3": {
+    "id": "3",
+    "exercise": "leg press",
+    "user": "user2"
+  },
+  "workout4": {
+    "id": "4",
+    "exercise": "bench press",
+    "user": "user3"
+  }
+}
