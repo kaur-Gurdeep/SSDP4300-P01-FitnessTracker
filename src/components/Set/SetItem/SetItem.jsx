@@ -1,14 +1,14 @@
 import styles from './SetItem.module.css';
-import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export default function SetItem({ set, exerciseType, onUpdate, index }) {
-  const [setData, setSetData] = useState(set);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSetData({ ...setData, [name]: Number(value) });
-  };
-
+export default function SetItem({
+  set,
+  exerciseType,
+  updateSet,
+  removeSet,
+  index,
+}) {
   return (
     <tr className={styles.setItem}>
       <td className={styles.setNumber}>Set {index + 1}</td>
@@ -22,8 +22,8 @@ export default function SetItem({ set, exerciseType, onUpdate, index }) {
               type='number'
               id={`reps-${index}`}
               name='reps'
-              value={setData.reps || ''}
-              onChange={handleInputChange}
+              value={set.unit || ''}
+              onChange={updateSet}
               placeholder='Reps'
               min='0'
             />
@@ -35,8 +35,8 @@ export default function SetItem({ set, exerciseType, onUpdate, index }) {
               type='number'
               id={`weight-${index}`}
               name='weight'
-              value={setData.weight || ''}
-              onChange={handleInputChange}
+              value={set.quantity || ''}
+              onChange={updateSet}
               placeholder='Weight'
               min='0'
               step='0.1'
@@ -52,8 +52,8 @@ export default function SetItem({ set, exerciseType, onUpdate, index }) {
               type='number'
               id={`distance-${index}`}
               name='distance'
-              value={setData.distance || ''}
-              onChange={handleInputChange}
+              value={set.unit || ''}
+              onChange={updateSet}
               placeholder='Distance'
               min='0'
               step='0.01'
@@ -66,14 +66,20 @@ export default function SetItem({ set, exerciseType, onUpdate, index }) {
               type='number'
               id={`time-${index}`}
               name='time'
-              value={setData.time || ''}
-              onChange={handleInputChange}
+              value={set.quantity || ''}
+              onChange={updateSet}
               placeholder='Time'
               min='0'
             />
           </div>
         </td>
       )}
+
+      <td>
+        <button type='button' onClick={removeSet}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      </td>
     </tr>
   );
 }

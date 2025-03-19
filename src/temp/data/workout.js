@@ -11,16 +11,16 @@ const initialWorkoutData = [
         duration: 30,
         sets: [
           {
-            reps: 10,
-            weight: 100,
+            unit: 10,
+            quantity: 100,
           },
           {
-            reps: 10,
-            weight: 100,
+            unit: 10,
+            quantity: 100,
           },
           {
-            reps: 10,
-            weight: 100,
+            unit: 10,
+            quantity: 100,
           },
         ],
       },
@@ -31,16 +31,16 @@ const initialWorkoutData = [
         duration: 30,
         sets: [
           {
-            reps: 10,
-            weight: 100,
+            unit: 10,
+            quantity: 100,
           },
           {
-            reps: 10,
-            weight: 100,
+            unit: 10,
+            quantity: 100,
           },
           {
-            reps: 10,
-            weight: 100,
+            unit: 10,
+            quantity: 100,
           },
         ],
       },
@@ -51,16 +51,16 @@ const initialWorkoutData = [
         duration: 30,
         sets: [
           {
-            distance: 1000,
-            time: 30,
+            unit: 1000,
+            quantity: 30,
           },
           {
-            distance: 2000,
-            time: 30,
+            unit: 2000,
+            quantity: 30,
           },
           {
-            distance: 1000,
-            time: 30,
+            unit: 1000,
+            quantity: 30,
           },
         ],
       },
@@ -78,16 +78,16 @@ const initialWorkoutData = [
         duration: 30,
         sets: [
           {
-            reps: 10,
-            weight: 100,
+            unit: 10,
+            quantity: 100,
           },
           {
-            reps: 10,
-            weight: 100,
+            unit: 10,
+            quantity: 100,
           },
           {
-            reps: 10,
-            weight: 100,
+            unit: 10,
+            quantity: 100,
           },
         ],
       },
@@ -98,16 +98,16 @@ const initialWorkoutData = [
         duration: 30,
         sets: [
           {
-            distance: 300,
-            time: 120,
+            unit: 300,
+            quantity: 120,
           },
           {
-            distance: 200,
-            time: 100,
+            unit: 200,
+            quantity: 100,
           },
           {
-            distance: 200,
-            time: 110,
+            unit: 200,
+            quantity: 110,
           },
         ],
       },
