@@ -17,18 +17,17 @@ function getExactExerciseNameMatch(exercises, name) {
 }
 
 // Get all exercises (max 10 without premium)
-exports.Exercises = async function (req, res) {
+exports.APIExercises = async function (req, res, next) {
   const exercises = await axios.get(API_NINJAS_URL, { headers: { 'X-Api-Key': X_API_KEY } });
   if (req.query.format === 'json') {
     res.json(exercises.data);
   } else {
-    // Currently, only sends HTML as response
     res.send(`<h1>Exercises</h1><ul><li>${exercises.data[0].name} - ${exercises.data[0].muscle}</li><li>${exercises.data[1].name} - ${exercises.data[1].muscle}</li></ul>`);
   }
 };
 
 // Get an exercise by name
-exports.Exercise = async function (req, res) {
+exports.APIExercise = async function (req, res, next) {
   // name needs to be exact, API returns a list of exercises matching partially the name
   try {
     const name = req.params.name;
@@ -56,4 +55,16 @@ exports.Exercise = async function (req, res) {
     console.error(error);
     res.status(500).send('An error occurred');
   }
+};
+
+exports.Exercise = async function (req, res, next) {
+  const exerciseId = req.params.exerciseId;
+  const exercise = await require('../data/exercise.json').find((exercise) => exercise.id === exerciseId);
+  res.json(exercise);
+};
+
+exports.ExercisesByType = async function (req, res, next) {
+  const exerciseType = req.params.exerciseType;
+  const exercises = await require('../data/exercise.json').filter((exercise) => exercise.type === exerciseType);
+  res.json(exercises);
 };

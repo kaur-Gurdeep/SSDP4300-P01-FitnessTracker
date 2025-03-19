@@ -1,22 +1,38 @@
-{
-  "workout1": {
+[
+  {
     "id": "1",
-    "exercise": "bench press",
-    "user": "user1"
+    "exerciseId": "1",
+    "userId": "1",
+    "stats": {
+      "reps": 3,
+      "weight": 100
+    }
   },
-  "workout2": {
+  {
     "id": "2",
-    "exercise": "run",
-    "user": "user1"
+    "exerciseId": "2",
+    "userId": "1",
+    "stats": {
+      "distance": 6,
+      "time": 1800000
+    }
   },
-  "workout3": {
+  {
     "id": "3",
-    "exercise": "leg press",
-    "user": "user2"
+    "exerciseId": "3",
+    "userId": "2",
+    "stats": {
+      "reps": 3,
+      "weight": 100
+    }
   },
-  "workout4": {
+  {
     "id": "4",
-    "exercise": "bench press",
-    "user": "user3"
+    "exerciseId": "1",
+    "userId": "3",
+    "stats": {
+      "reps": 3,
+      "weight": 100
+    }
   }
-}
+]

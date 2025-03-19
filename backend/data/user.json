@@ -1,22 +1,26 @@
-{
-  "user1": {
+[
+  {
+    "id": "1",
     "fname": "gurdeep",
     "lname": "kaur",
     "email": "g@home.com"
   },
-  "user2": {
+  {
+    "id": "2",
     "fname": "ryan",
     "lname": "burns",
     "email": "r@home.com"
   },
-  "user3": {
+  {
+    "id": "3",
     "fname": "sam",
     "lname": "maqsoudi",
     "email": "s@home.com"
   },
-  "user4": {
+  {
+    "id": "4",
     "fname": "marc",
     "lname": "baron",
     "email": "m@home.com"
   }
-}
+]

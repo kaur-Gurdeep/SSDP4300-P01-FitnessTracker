@@ -1,11 +1,11 @@
 // Requires and configs
 const express = require('express');
-const ExerciseController = require('../controllers/ExerciseController');
+const WorkoutController = require('../controllers/WorkoutController');
 
 // Express and Controllers
 const workoutRouter = express.Router();
 
 workoutRouter.get('/', WorkoutController.Workouts);
-workoutRouter.get('/:name', WorkoutController.Workout);
+workoutRouter.get('/:userId', WorkoutController.WorkoutByUser);
 
-module.exports = exerciseRouter;
+module.exports = workoutRouter;

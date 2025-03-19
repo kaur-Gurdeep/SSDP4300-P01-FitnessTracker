@@ -1,11 +1,20 @@
-{
-  "leg press": {
-    "type": "muscle"
+[
+  {
+    "id": "1",
+    "name": "bench press",
+    "type": "muscle",
+    "recipe": ["reps", "weight"]
   },
-  "run": {
-    "type": "cardio"
+  {
+    "id": "2",
+    "name": "run",
+    "type": "cardio",
+    "recipe": ["distance", "time"]
   },
-  "bench press": {
-    "type": "muscle"
+  {
+    "id": "3",
+    "name": "leg press",
+    "type": "muscle",
+    "recipe": ["reps", "weight"]
   }
-}
+]
