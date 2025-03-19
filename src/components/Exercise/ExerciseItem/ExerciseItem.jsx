@@ -9,13 +9,12 @@ export default function ExerciseItem({
   addSet,
   removeSet,
   updateSet,
-  exerciseIndex,
 }) {
   return (
     <div className={styles.exerciseItem}>
       <div className={styles.exerciseHeader}>
         <span>{exercise.name}</span>
-        <button type='button' onClick={() => removeExercise(exerciseIndex)}>
+        <button type='button' onClick={removeExercise}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
@@ -40,14 +39,13 @@ export default function ExerciseItem({
           <SetItem
             key={index}
             set={set}
-            exerciseType={exercise.type}
-            updateSet={updateSet(exerciseIndex, index)}
-            removeSet={() => removeSet(exerciseIndex, index)}
+            exercise={exercise}
+            updateSet={updateSet}
+            removeSet={removeSet}
             index={index}
-            exerciseIndex={exerciseIndex}
           />
         ))}
-        <button type='button' onClick={() => addSet(exerciseIndex)}>
+        <button type='button' onClick={() => addSet(exercise)}>
           <FontAwesomeIcon icon={faSquareCheck} />
         </button>
       </div>

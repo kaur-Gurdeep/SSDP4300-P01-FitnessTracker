@@ -3,7 +3,7 @@ import styles from './WorkoutCreate.module.css';
 import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import ExerciseItem from '../../Exercise/ExerciseItem/ExerciseItem';
-import { exercises } from '../../../temp/data/exercise';
+import { exercisesDatabase } from '../../../temp/data/exercise';
 
 export default function WorkoutCreate({ dispatch }) {
   const [workout, setWorkout] = useState({
@@ -16,11 +16,16 @@ export default function WorkoutCreate({ dispatch }) {
   const addExercise = () => {
     if (!selectedExerciseId) return;
 
-    const exerciseToAdd = exercises.find((ex) => ex.id === selectedExerciseId);
+    const exerciseToAdd = exercisesDatabase.find(
+      (ex) => ex.id === selectedExerciseId
+    );
     if (exerciseToAdd) {
       setWorkout({
         ...workout,
-        exercises: [...workout.exercises, { ...exerciseToAdd }],
+        exercises: [
+          ...workout.exercises,
+          { ...exerciseToAdd, id: workout.exercises.length + 1 },
+        ],
       });
       setSelectedExerciseId('');
     }
@@ -42,11 +47,11 @@ export default function WorkoutCreate({ dispatch }) {
     });
   };
 
-  const addSet = (exerciseId) => {
+  const addSet = (exerciseToAddSet) => {
     setWorkout({
       ...workout,
       exercises: workout.exercises.map((exercise) =>
-        exercise.id === exerciseId
+        exercise.id === exerciseToAddSet.id
           ? {
               ...exercise,
               sets: [...exercise.sets, { unit: 0, quantity: 0 }],
@@ -56,11 +61,11 @@ export default function WorkoutCreate({ dispatch }) {
     });
   };
 
-  const removeSet = (exerciseId, setIndex) => {
+  const removeSet = (exerciseIndex, setIndex) => {
     setWorkout({
       ...workout,
       exercises: workout.exercises.map((exercise) =>
-        exercise.id === exerciseId
+        exercise.id === exerciseIndex
           ? {
               ...exercise,
               sets: exercise.sets.filter((_, index) => index !== setIndex),
@@ -70,11 +75,11 @@ export default function WorkoutCreate({ dispatch }) {
     });
   };
 
-  const updateSet = (exerciseId, setIndex, newSet) => {
+  const updateSet = (exerciseIndex, setIndex, newSet) => {
     setWorkout({
       ...workout,
       exercises: workout.exercises.map((exercise) =>
-        exercise.id === exerciseId
+        exercise.id === exerciseIndex
           ? {
               ...exercise,
               sets: exercise.sets.map((set, index) =>
@@ -132,7 +137,7 @@ export default function WorkoutCreate({ dispatch }) {
           onChange={(e) => setSelectedExerciseId(e.target.value)}
         >
           <option value=''>Select Exercise</option>
-          {exercises.map((exercise) => (
+          {exercisesDatabase.map((exercise) => (
             <option key={exercise.id} value={exercise.id}>
               {exercise.name}
             </option>
@@ -163,7 +168,6 @@ export default function WorkoutCreate({ dispatch }) {
                 addSet={addSet}
                 removeSet={removeSet}
                 updateSet={updateSet}
-                exerciseIndex={index}
               />
             ))}
           </ul>

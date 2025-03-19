@@ -4,18 +4,19 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function SetItem({
   set,
-  exerciseType,
+  exercise,
   updateSet,
   removeSet,
   index,
+  exerciseIndex,
 }) {
   return (
-    <tr className={styles.setItem}>
-      <td className={styles.setNumber}>Set {index + 1}</td>
+    <div className={styles.setItem}>
+      <div className={styles.setNumber}>Set {index + 1}</div>
 
-      {exerciseType === 'Strength' ? (
+      {exercise.type === 'Strength' ? (
         // Strength exercise fields
-        <td className={styles.setFields}>
+        <div className={styles.setFields}>
           <div className={styles.inputGroup}>
             <label htmlFor={`reps-${index}`} hidden></label>
             <input
@@ -23,7 +24,12 @@ export default function SetItem({
               id={`reps-${index}`}
               name='reps'
               value={set.unit || ''}
-              onChange={updateSet}
+              onChange={(e) =>
+                updateSet(exercise, index, {
+                  ...set,
+                  unit: e.target.value,
+                })
+              }
               placeholder='Reps'
               min='0'
             />
@@ -36,16 +42,21 @@ export default function SetItem({
               id={`weight-${index}`}
               name='weight'
               value={set.quantity || ''}
-              onChange={updateSet}
+              onChange={(e) =>
+                updateSet(exercise, index, {
+                  ...set,
+                  quantity: e.target.value,
+                })
+              }
               placeholder='Weight'
               min='0'
               step='0.1'
             />
           </div>
-        </td>
+        </div>
       ) : (
         // Cardio exercise fields
-        <td className={styles.setFields}>
+        <div className={styles.setFields}>
           <div className={styles.inputGroup}>
             <label htmlFor={`distance-${index}`} hidden></label>
             <input
@@ -53,7 +64,12 @@ export default function SetItem({
               id={`distance-${index}`}
               name='distance'
               value={set.unit || ''}
-              onChange={updateSet}
+              onChange={(e) =>
+                updateSet(exercise, index, {
+                  ...set,
+                  unit: e.target.value,
+                })
+              }
               placeholder='Distance'
               min='0'
               step='0.01'
@@ -67,19 +83,24 @@ export default function SetItem({
               id={`time-${index}`}
               name='time'
               value={set.quantity || ''}
-              onChange={updateSet}
+              onChange={(e) =>
+                updateSet(exercise, index, {
+                  ...set,
+                  quantity: e.target.value,
+                })
+              }
               placeholder='Time'
               min='0'
             />
           </div>
-        </td>
+        </div>
       )}
 
-      <td>
-        <button type='button' onClick={removeSet}>
+      <div>
+        <button type='button' onClick={() => removeSet(exerciseIndex, index)}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
-      </td>
-    </tr>
+      </div>
+    </div>
   );
 }

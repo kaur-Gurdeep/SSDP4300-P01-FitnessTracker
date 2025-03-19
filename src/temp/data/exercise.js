@@ -1,4 +1,4 @@
-const exercises = [
+const exercisesDatabase = [
   {
     id: '1',
     name: 'Bench Press',
@@ -37,4 +37,4 @@ const exercises = [
   },
 ];
 
-export { exercises };
+export { exercisesDatabase };
