@@ -1,10 +1,19 @@
 import React from 'react';
-import "./user.css";
+import AccountSummary from './AccSummary';
+import UserHealthSummary from './UserHealthSummary';
+import './User.css';
 
 const UserDashboard = () => {
   return (
-    <div>
-      <p>This is your personal dashboard page.</p>
+    <div className="user-dashboard-container">
+      <header>
+        <h2>Welcome to Your Dashboard</h2>
+      </header>
+
+      <div className="dashboard-sections">
+        <AccountSummary />
+        <UserHealthSummary />
+      </div>
     </div>
   );
 };

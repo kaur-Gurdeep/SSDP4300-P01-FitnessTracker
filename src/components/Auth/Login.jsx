@@ -13,10 +13,25 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Logged In:", formData);
+  //   navigate("/user-dashboard"); // Redirect to Dashboard after login-will chnage later
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Logged In:", formData);
-    navigate("/user-dashboard"); // Redirect to Dashboard after login-will chnage later
+    // Simulating a login process
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    
+    // Check if the credentials match the stored data
+    if (storedUser && storedUser.email === formData.email) {
+      setUser(storedUser);
+      console.log("Logged In:", storedUser);
+      navigate("/user-dashboard"); // Redirect to Dashboard after login
+    } else {
+      alert("Invalid login credentials");
+    }
   };
 
   return (

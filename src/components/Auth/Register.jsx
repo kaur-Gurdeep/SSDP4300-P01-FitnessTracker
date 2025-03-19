@@ -14,9 +14,27 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Registered:", formData);
+  //   navigate("/login"); // Redirect to Login after registration
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Registered:", formData);
+    // Save the registered user data
+    const newUser = {
+      name: formData.name,
+      email: formData.email,
+    };
+
+    // for now store the user data with localStorage
+    localStorage.setItem("user", JSON.stringify(newUser));
+
+    // Set user data in the parent component or global state
+    setUser(newUser);
+
+    console.log("Registered:", newUser);
     navigate("/login"); // Redirect to Login after registration
   };
 
