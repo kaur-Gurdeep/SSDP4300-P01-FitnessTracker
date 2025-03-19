@@ -29,7 +29,7 @@ body {
   --darkGrey: #464d53;
   --caloryCard: #656565;
   --appColor: #3c3f45;
-  --planCard: linear-gradient(210.41deg, #fa5042 1.14%, #ffa739 100.75%);
+  --planCard: linear-gradient(210.41deg, #b2b1af 1.14%, #478648 100.75%);
 }
 
 .stroke-text {
