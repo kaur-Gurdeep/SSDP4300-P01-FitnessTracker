@@ -21,6 +21,6 @@
     "id": "4",
     "name": "jumping jack",
     "type": "muscle",
-    "recipe": ["reps", "tim"]
+    "recipe": ["reps", "time"]
   }
 ]
