@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "userId": "1",
     "name": "Workout 1",
     "exercises": [
@@ -24,13 +25,80 @@
       },
       {
         "id": "7",
-        "workoutId": "1"
-      },
-      {
-        "id": "9",
-        "workoutId": "1"
+        "workoutId": "1",
+        "exercises": [
+          {
+            "id": "6",
+            "exerciseId": "1",
+            "workoutId": "1",
+            "sets": [
+              {
+                "reps": 10,
+                "weight": 100
+              },
+              {
+                "reps": 10,
+                "weight": 100
+              },
+              {
+                "reps": 10,
+                "weight": 100
+              }
+            ]
+          }
+        ]
       }
     ]
   },
-  {}
+  {
+    "id": "2",
+    "userId": "2",
+    "name": "Workout 1",
+    "exercises": [
+      {
+        "id": "12",
+        "exerciseId": "1",
+        "workoutId": "1",
+        "sets": [
+          {
+            "reps": 10,
+            "weight": 100
+          },
+          {
+            "reps": 10,
+            "weight": 100
+          },
+          {
+            "reps": 10,
+            "weight": 100
+          }
+        ]
+      },
+      {
+        "id": "14",
+        "workoutId": "1",
+        "exercises": [
+          {
+            "id": "6",
+            "exerciseId": "1",
+            "workoutId": "1",
+            "sets": [
+              {
+                "reps": 10,
+                "weight": 100
+              },
+              {
+                "reps": 10,
+                "weight": 100
+              },
+              {
+                "reps": 10,
+                "weight": 100
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 ]
