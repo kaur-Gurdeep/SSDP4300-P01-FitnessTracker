@@ -5,59 +5,68 @@ import SetItem from '../../Set/SetItem/SetItem';
 import { useState } from 'react';
 
 export default function ExerciseItem({ exercise, onRemove }) {
-  const [exerciseData, setExerciseData] = useState(exercise);
+  const [sets, setSets] = useState(exercise.sets || [createInitialSet()]);
+
+  function createInitialSet() {
+    if (exercise.type === 'Strength') {
+      return { reps: 0, weight: 0 };
+    } else if (exercise.type === 'Cardio') {
+      return { time: 0, distance: 0 };
+    }
+  }
+
   return (
     <div className={styles.exerciseItem}>
       <div className={styles.exerciseHeader}>
-        <span>{exerciseData.name}</span>
-        <button type='button' onClick={() => onRemove(exerciseData.id)}>
+        <span>{exercise.name}</span>
+        <button type='button' onClick={() => onRemove(exercise.id)}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
-      <div className={styles.setsContainer}>
-        <div className={styles.setHeader}>
-          {exerciseData.type === 'Strength' && (
-            <div>
-              <span>Set</span>
-              <span>Reps</span>
-              <span>Weight</span>
-            </div>
+      <table className={styles.setsContainer}>
+        <thead className={styles.setHeader}>
+          {exercise.type === 'Strength' && (
+            <tr>
+              <th>Set</th>
+              <th>Reps</th>
+              <th>Weight</th>
+            </tr>
           )}
-          {exerciseData.type === 'Cardio' && (
-            <div>
-              <span>Set</span>
-              <span>Time</span>
-              <span>Distance</span>
-            </div>
+          {exercise.type === 'Cardio' && (
+            <tr>
+              <th>Set</th>
+              <th>Time</th>
+              <th>Distance</th>
+            </tr>
           )}
-        </div>
+        </thead>
 
-        {exerciseData.sets.length === 0 && (
+        {sets.length === 0 && (
           <SetItem
             set={{}}
-            exerciseType={exerciseData.type}
+            exerciseType={exercise.type}
             onUpdate={(newSet) => {
-              const newSets = [...exerciseData.sets];
+              const newSets = [...sets];
               newSets.push(newSet);
-              setExerciseData({ ...exerciseData, sets: newSets });
+              setSets(newSets);
             }}
             index={0}
           />
         )}
-        {exerciseData.sets.map((set, index) => (
+        {sets.map((set, index) => (
           <SetItem
             key={index}
             set={set}
-            exerciseType={exerciseData.type}
+            exerciseType={exercise.type}
             onUpdate={(newSet) => {
-              const newSets = [...exerciseData.sets];
+              const newSets = [...sets];
               newSets[index] = newSet;
-              setExerciseData({ ...exerciseData, sets: newSets });
+              setSets(newSets);
             }}
             index={index}
           />
         ))}
-      </div>
+      </table>
     </div>
   );
 }
