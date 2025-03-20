@@ -7,36 +7,6 @@ exports.Workouts = async function (req, res) {
   res.json(workouts);
 };
 
-// exports.WorkoutByUser = async function (req, res, next) {
-//   let tempWorkouts = [];
-//   let tempExercises = [];
-//   let tempSets = [];
-
-//   const userId = parseInt(req.params.userId);
-//   const workouts = await require('../data/workout2.json').filter((workout) => workout.userId === userId);
-
-//   workouts.forEach(async (workout) => {
-//     workout.exercises.forEach(async (exerciseId) => {
-//       const exercise = await require('../data/exercise.json').find((e) => e.id === exerciseId);
-
-//       exercise.sets.forEach(async (setId) => {
-//         const set = await require('../data/set.json').find((s) => s.id === setId);
-//         tempSets.push(set);
-//       });
-
-//       exercise.sets = tempSets;
-//       tempExercises.push(exercise);
-//     });
-
-//     workout.exercises = tempExercises;
-//     tempWorkouts.push(workout);
-//   });
-
-//   // fullWorkout = workout;
-//   // const workouts = await require('../data/workout.json').filter((workout) => workout.userId === userId);
-//   res.json(tempWorkouts);
-// };
-
 exports.WorkoutByUser = async function (req, res, next) {
   const userId = parseInt(req.params.userId);
 
