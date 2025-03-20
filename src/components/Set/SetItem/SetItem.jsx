@@ -1,18 +1,23 @@
 import styles from './SetItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function SetItem({ set, exercise, dispatch, index }) {
+  const isStrength = exercise.type === 'strength';
+  const unitPlaceholder = isStrength ? 'Reps' : 'Time';
+  const quantityPlaceholder = isStrength ? 'Weight' : 'Distance';
+  const quantityStep = isStrength ? '0.5' : '0.01';
+
   return (
     <div className={styles.setItem}>
-      <div className={styles.setNumber}>Set {index + 1}</div>
+      <div className={styles.setNumber}>{index + 1}</div>
 
       {/* First input field - Reps or Time */}
       <div className={styles.inputField}>
         <input
           type='number'
-          id={`${exercise.type === 'Strength' ? 'reps' : 'time'}-${index}`}
-          name={exercise.type === 'Strength' ? 'reps' : 'time'}
+          id={`${isStrength ? 'reps' : 'time'}-${exercise.id}-${index}`}
+          name={isStrength ? 'reps' : 'time'}
           value={set.unit || ''}
           onChange={(e) =>
             dispatch({
@@ -25,8 +30,9 @@ export default function SetItem({ set, exercise, dispatch, index }) {
               },
             })
           }
-          placeholder={exercise.type === 'Strength' ? 'Reps' : 'Time'}
+          placeholder={unitPlaceholder}
           min='0'
+          aria-label={`${unitPlaceholder} for set ${index + 1}`}
         />
       </div>
 
@@ -34,10 +40,8 @@ export default function SetItem({ set, exercise, dispatch, index }) {
       <div className={styles.inputField}>
         <input
           type='number'
-          id={`${
-            exercise.type === 'Strength' ? 'weight' : 'distance'
-          }-${index}`}
-          name={exercise.type === 'Strength' ? 'weight' : 'distance'}
+          id={`${isStrength ? 'weight' : 'distance'}-${exercise.id}-${index}`}
+          name={isStrength ? 'weight' : 'distance'}
           value={set.quantity || ''}
           onChange={(e) =>
             dispatch({
@@ -50,9 +54,10 @@ export default function SetItem({ set, exercise, dispatch, index }) {
               },
             })
           }
-          placeholder={exercise.type === 'Strength' ? 'Weight' : 'Distance'}
+          placeholder={quantityPlaceholder}
           min='0'
-          step={exercise.type === 'Strength' ? '0.5' : '0.01'}
+          step={quantityStep}
+          aria-label={`${quantityPlaceholder} for set ${index + 1}`}
         />
       </div>
 
@@ -69,8 +74,9 @@ export default function SetItem({ set, exercise, dispatch, index }) {
               },
             })
           }
+          aria-label={`Complete set ${index + 1}`}
         >
-          <FontAwesomeIcon icon={faSquareCheck} />
+          <FontAwesomeIcon icon={faCheck} />
         </button>
         <button
           type='button'
@@ -84,6 +90,7 @@ export default function SetItem({ set, exercise, dispatch, index }) {
               },
             })
           }
+          aria-label={`Delete set ${index + 1}`}
         >
           <FontAwesomeIcon icon={faTrash} />
         </button>

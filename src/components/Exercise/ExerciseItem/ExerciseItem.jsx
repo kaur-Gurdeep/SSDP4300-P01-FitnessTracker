@@ -1,13 +1,20 @@
 import styles from './ExerciseItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPlus } from '@fortawesome/free-solid-svg-icons';
 import SetItem from '../../Set/SetItem/SetItem';
 
 export default function ExerciseItem({ exercise, dispatch, exerciseIndex }) {
   return (
     <div className={styles.exerciseItem}>
       <div className={styles.exerciseHeader}>
-        <span>{exercise.name}</span>
+        <div>
+          <span className={styles.exerciseName}>{exercise.name}</span>
+          <div className={styles.exerciseType}>
+            {exercise.type === 'strength'
+              ? 'Strength Exercise'
+              : 'Cardio Exercise'}
+          </div>
+        </div>
         <button
           type='button'
           onClick={() =>
@@ -16,6 +23,7 @@ export default function ExerciseItem({ exercise, dispatch, exerciseIndex }) {
               payload: { exerciseIndex },
             })
           }
+          aria-label={`Remove ${exercise.name}`}
         >
           <FontAwesomeIcon icon={faTrash} />
         </button>
@@ -57,7 +65,7 @@ export default function ExerciseItem({ exercise, dispatch, exerciseIndex }) {
             })
           }
         >
-          <FontAwesomeIcon icon={faSquareCheck} /> Add Set
+          <FontAwesomeIcon icon={faPlus} /> Add Set
         </button>
       </div>
     </div>

@@ -1,6 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './WorkoutCreate.module.css';
-import { faCheck, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faPlus,
+  faPlay,
+  faPause,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 import { useReducer, useState } from 'react';
 import ExerciseItem from '../../Exercise/ExerciseItem/ExerciseItem';
 import { exercisesDatabase } from '../../../temp/data/exercise';
@@ -164,6 +170,7 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
         </label>
         <input
           type='text'
+          id='workoutName'
           placeholder='Workout Name'
           value={workout.name}
           onChange={(e) =>
@@ -178,6 +185,7 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
           className={styles.createBtn}
           onClick={createWorkout}
           disabled={!workout.name.trim() || workout.exercises.length === 0}
+          aria-label='Create workout'
         >
           <FontAwesomeIcon icon={faCheck} />
         </button>
@@ -185,13 +193,9 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
 
       {/* Exercise Selector */}
       <div className={styles.exerciseSelector}>
-        <label htmlFor='exercise' hidden>
-          Exercise Selector
-        </label>
         <select
           name='exercise'
           id='exercise'
-          className={styles.exerciseSelector}
           value={selectedExerciseId}
           onChange={(e) => setSelectedExerciseId(e.target.value)}
         >
@@ -207,8 +211,9 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
           className={styles.addBtn}
           onClick={addExercise}
           disabled={!selectedExerciseId}
+          aria-label='Add exercise'
         >
-          <FontAwesomeIcon icon={faSquareCheck} />
+          <FontAwesomeIcon icon={faPlus} /> Add Exercise
         </button>
       </div>
 
@@ -236,10 +241,11 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
           onClick={toggleWorkout}
           className={isWorkoutActive ? styles.pauseBtn : styles.startBtn}
         >
+          <FontAwesomeIcon icon={isWorkoutActive ? faPause : faPlay} />
           {isWorkoutActive ? 'Pause Workout' : 'Start Workout'}
         </button>
         <button onClick={cancelWorkout} className={styles.cancelBtn}>
-          {/* TODO: navigate to the home page on click */}
+          <FontAwesomeIcon icon={faTimes} />
           Cancel Workout
         </button>
       </div>

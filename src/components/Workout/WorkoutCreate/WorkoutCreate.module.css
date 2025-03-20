@@ -1,27 +1,33 @@
 .createWorkout {
   width: 90%;
+  max-width: 1000px;
   min-width: 400px;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: flex-start;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #f1f3f543;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.08);
   color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
 }
 
 .workoutHeader {
   display: grid;
   grid-template-columns: 20% 1fr 20%;
-  gap: 10px;
+  gap: 20px;
   width: 100%;
   align-items: center;
   justify-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .timerSection {
@@ -29,6 +35,10 @@
   justify-self: center;
   align-self: center;
   min-width: max-content;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .workoutHeader input {
@@ -38,69 +48,157 @@
   transition: 0.3s;
   text-align: center;
   font-size: 2rem;
-  /*TODO: have the font size scale with input */
   font-weight: bold;
   background-color: transparent;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 15px;
+}
+
+.workoutHeader input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .workoutHeader input:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: 0.3s;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-bottom-color: var(--green);
 }
 
 .workoutHeader input:focus {
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: 0.3s;
-  color: white;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: var(--green);
+  box-shadow: 0 4px 12px rgba(32, 112, 44, 0.2);
 }
 
 .createBtn {
-  background-color: rgba(32, 112, 44, 1);
+  background-color: var(--green);
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   border: none;
   cursor: pointer;
-  transition: 0.3s;
-  border-radius: 100%;
-  padding: 5px;
-  width: 30px;
-  height: 30px;
+  transition: 0.3s ease-in-out;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .createBtn:hover {
   background-color: var(--greenHover);
-  transform: scale(1.1);
-  transition: 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 .createBtn:active {
-  transform: scale(0.9);
-  transition: 0.3s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  background-color: var(--green);
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .createBtn:disabled {
   background-color: rgba(32, 112, 44, 0.5);
-  transform: scale(1);
+  transform: none;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
-.createBtn:disabled:hover {
+.exerciseSelector {
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.exerciseSelector select {
+  flex: 1;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.exerciseSelector select:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 2px rgba(32, 112, 44, 0.3);
+}
+
+.addBtn {
+  background-color: var(--green);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addBtn:hover:not(:disabled) {
+  background-color: var(--greenHover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.addBtn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.addBtn:disabled {
   background-color: rgba(32, 112, 44, 0.5);
-  transform: scale(1);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.workoutExercises {
+  width: 100%;
+  margin-bottom: 2rem;
+  overflow-y: auto;
+  align-items: center;
+}
+
+/* Custom scrollbar */
+.workoutExercises::-webkit-scrollbar {
+  width: 8px;
+}
+
+.workoutExercises::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.workoutExercises::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.workoutExercises::-webkit-scrollbar-thumb:hover {
+  background: var(--green);
 }
 
 .workoutExercise {
   width: 100%;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
   display: flex;
+  gap: 20px;
 }
 
 .formActions {
@@ -108,37 +206,103 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  gap: 10px;
+  gap: 15px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .startBtn,
 .pauseBtn,
 .cancelBtn {
   width: 60%;
-  border-radius: 8px;
-  border: 1px solid black;
-  padding: 5px;
+  max-width: 300px;
+  border-radius: 12px;
+  border: none;
+  padding: 14px 20px;
   font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cancelBtn {
-  background-color: rgb(159, 1, 1);
+  background-color: rgba(159, 1, 1, 0.9);
   color: white;
+}
+
+.cancelBtn:hover {
+  background-color: rgb(190, 0, 0);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(159, 1, 1, 0.3);
 }
 
 .startBtn {
-  background-color: #4caf50;
+  background-color: var(--green);
   color: white;
 }
 
+.startBtn:hover {
+  background-color: var(--greenHover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(32, 112, 44, 0.3);
+}
+
 .pauseBtn {
-  background-color: #ff9800;
+  background-color: var(--orange);
   color: white;
+}
+
+.pauseBtn:hover {
+  background-color: var(--orangeHover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(244, 137, 21, 0.3);
 }
 
 .durationInfo {
   text-align: center;
   margin-top: 10px;
   font-size: 0.9rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .createWorkout {
+    width: 95%;
+    padding: 1.5rem;
+    min-width: unset;
+  }
+
+  .workoutHeader {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 15px;
+  }
+
+  .timerSection {
+    grid-row: 1;
+  }
+
+  .workoutHeader input {
+    grid-row: 2;
+    font-size: 1.5rem;
+  }
+
+  .createBtn {
+    grid-row: 3;
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+
+  .startBtn,
+  .pauseBtn,
+  .cancelBtn {
+    width: 80%;
+  }
 }
