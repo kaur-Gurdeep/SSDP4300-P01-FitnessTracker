@@ -15,7 +15,8 @@ import { initialWorkoutData } from './temp/data/workout.js';
 function App() {
   const reducer = (state, action) => {
     switch (action.type) {
-      case 'addExercise':
+      case 'cancelWorkout':
+        // route to home
         return state;
       case 'addWorkout': {
         const newWorkout = {

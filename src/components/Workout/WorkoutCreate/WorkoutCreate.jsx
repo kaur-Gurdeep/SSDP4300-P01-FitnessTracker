@@ -133,8 +133,8 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
   };
 
   const cancelWorkout = (e) => {
-    // navigate to home
-    setIsWorkoutActive(false);
+    e.preventDefault();
+    workoutDispatch({ type: 'resetWorkout' });
   };
 
   const handleTimerUpdate = (seconds) => {
@@ -252,6 +252,7 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
           {isWorkoutActive ? 'Pause Workout' : 'Start Workout'}
         </button>
         <button onClick={cancelWorkout} className={styles.cancelBtn}>
+          {/*navigate to the home page on click */}
           Cancel Workout
         </button>
       </div>
