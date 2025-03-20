@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import styles from './layout.module.css'; 
-import Logo from "../../assets/logo.png";
-import Bars from "../../assets/bars.png";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import styles from './layout.module.css';
+import Logo from '../../assets/logo.png';
+import Bars from '../../assets/bars.png';
+import { Link } from 'react-router-dom';
 
-
-const Header = () => {
+const Header = ({ user }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [menuOpened, setMenuOpened] = useState(false);
 
@@ -18,50 +17,59 @@ const Header = () => {
 
   return (
     <div className={styles['header']}>
-      <img src={Logo} alt="fitness tracker logo" className={styles['logo']} />
+      <img src={Logo} alt='fitness tracker logo' className={styles['logo']} />
       {menuOpened === false && isMobile ? (
         <div
           style={{
-            cursor: "pointer",
-            backgroundColor: "var(--appColor)",
-            padding: "0.5rem",
-            borderRadius: "5px",
+            cursor: 'pointer',
+            backgroundColor: 'var(--appColor)',
+            padding: '0.5rem',
+            borderRadius: '5px',
           }}
           onClick={() => setMenuOpened(true)}
         >
           <img
             src={Bars}
-            alt="hamburger"
+            alt='hamburger'
             style={{
-              width: "1.5rem",
-              height: "1.5rem",
-              maxHeight: "100%",
+              width: '1.5rem',
+              height: '1.5rem',
+              maxHeight: '100%',
             }}
           />
         </div>
       ) : (
         <ul className={styles['header-menu']}>
           <li onClick={() => setMenuOpened(false)}>
-            <Link to="/">Home</Link>
+            <Link to='/'>Home</Link>
           </li>
           <li onClick={() => setMenuOpened(false)}>
-            <Link to="/about">About</Link>
+            <Link to='/about'>About</Link>
           </li>
           <li onClick={() => setMenuOpened(false)}>
-            <Link to="/contact">Contact</Link>
+            <Link to='/contact'>Contact</Link>
           </li>
-          <li onClick={() => setMenuOpened(false)}>
-            <Link to='/workouts'>Workouts</Link>
-          </li>
-          <li onClick={() => setMenuOpened(false)}>
-            <Link to='/workout/create'>Create Workout</Link>
-          </li>
-          <li onClick={() => setMenuOpened(false)}>
-            <Link to='/user-dashboard'>Dashboard</Link>
-          </li>
-          <li onClick={() => setMenuOpened(false)}>
-            <Link to="/login">Login</Link>
-          </li>
+
+          {user ? (
+            <>
+              <li onClick={() => setMenuOpened(false)}>
+                <Link to='/workouts'>Workouts</Link>
+              </li>
+              <li onClick={() => setMenuOpened(false)}>
+                <Link to='/workout/create'>Create Workout</Link>
+              </li>
+              <li onClick={() => setMenuOpened(false)}>
+                <Link to='/user-dashboard'>Dashboard</Link>
+              </li>
+              <li onClick={() => setMenuOpened(false)}>
+                <Link to='/logout'>Logout</Link>
+              </li>
+            </>
+          ) : (
+            <li onClick={() => setMenuOpened(false)}>
+              <Link to='/login'>Login</Link>
+            </li>
+          )}
         </ul>
       )}
     </div>
