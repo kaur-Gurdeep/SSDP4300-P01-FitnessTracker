@@ -239,7 +239,7 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
           {isWorkoutActive ? 'Pause Workout' : 'Start Workout'}
         </button>
         <button onClick={cancelWorkout} className={styles.cancelBtn}>
-          {/*navigate to the home page on click */}
+          {/* TODO: navigate to the home page on click */}
           Cancel Workout
         </button>
       </div>
