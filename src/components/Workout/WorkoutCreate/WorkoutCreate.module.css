@@ -58,3 +58,25 @@
   background-color: rgb(159, 1, 1);
   color: white;
 }
+
+.timerSection {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.startBtn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.pauseBtn {
+  background-color: #ff9800;
+  color: white;
+}
+
+.durationInfo {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #666;
+}

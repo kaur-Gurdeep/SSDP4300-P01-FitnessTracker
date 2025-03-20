@@ -4,12 +4,17 @@ import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { useReducer, useState } from 'react';
 import ExerciseItem from '../../Exercise/ExerciseItem/ExerciseItem';
 import { exercisesDatabase } from '../../../temp/data/exercise';
+import WorkoutTimer from '../../WorkoutTimer';
+import '../../../../src/styles/WorkoutTimer.css';
 
 // Workout reducer function
 const workoutReducer = (state, action) => {
   switch (action.type) {
     case 'updateName':
       return { ...state, name: action.payload };
+
+    case 'updateDuration':
+      return { ...state, duration: action.payload };
 
     case 'addExercise':
       return {
@@ -81,6 +86,7 @@ const workoutReducer = (state, action) => {
         name: '',
         date: new Date().toISOString(),
         exercises: [],
+        duration: 0,
       };
 
     default:
@@ -93,8 +99,10 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
     name: '',
     date: new Date().toISOString(),
     exercises: [],
+    duration: 0,
   });
   const [selectedExerciseId, setSelectedExerciseId] = useState('');
+  const [isWorkoutActive, setIsWorkoutActive] = useState(false);
 
   const addExercise = () => {
     if (!selectedExerciseId) return;
@@ -126,6 +134,30 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
 
   const cancelWorkout = (e) => {
     // navigate to home
+    setIsWorkoutActive(false);
+  };
+
+  const handleTimerUpdate = (seconds) => {
+    workoutDispatch({
+      type: 'updateDuration',
+      payload: seconds,
+    });
+  };
+
+  const toggleWorkout = () => {
+    setIsWorkoutActive((prevState) => !prevState);
+  };
+
+  const formatTime = (totalSeconds) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return [
+      hours.toString().padStart(2, '0'),
+      minutes.toString().padStart(2, '0'),
+      seconds.toString().padStart(2, '0'),
+    ].join(':');
   };
 
   return (
@@ -146,9 +178,22 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
             })
           }
         />
-        <button className={styles.finishWorkoutBtn}>
+        <button
+          type='submit'
+          className={styles.createBtn}
+          onClick={createWorkout}
+          disabled={!workout.name.trim() || workout.exercises.length === 0}
+        >
           <FontAwesomeIcon icon={faSquareCheck} />
         </button>
+      </div>
+
+      {/* Timer Display */}
+      <div className={styles.timerSection}>
+        <WorkoutTimer
+          isRunning={isWorkoutActive}
+          onTimerUpdate={handleTimerUpdate}
+        />
       </div>
 
       {/* Exercise Selector */}
@@ -201,17 +246,22 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
       {/* Create Workout Button */}
       <div className={styles.formActions}>
         <button
-          type='submit'
-          className={styles.createBtn}
-          onClick={createWorkout}
-          disabled={!workout.name.trim() || workout.exercises.length === 0}
+          onClick={toggleWorkout}
+          className={isWorkoutActive ? styles.pauseBtn : styles.startBtn}
         >
-          Create Workout
+          {isWorkoutActive ? 'Pause Workout' : 'Start Workout'}
         </button>
         <button onClick={cancelWorkout} className={styles.cancelBtn}>
           Cancel Workout
         </button>
       </div>
+
+      {/* Display duration */}
+      {workout.duration > 0 && (
+        <div className={styles.durationInfo}>
+          <p>Workout Duration: {formatTime(workout.duration)}</p>
+        </div>
+      )}
     </div>
   );
 }

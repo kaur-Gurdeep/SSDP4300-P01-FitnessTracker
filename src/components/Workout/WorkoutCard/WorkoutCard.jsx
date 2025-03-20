@@ -7,11 +7,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function WorkoutCard({ workout }) {
-  function calculateTotalDuration() {
-    return workout.exercises.reduce(
-      (total, exercise) => total + exercise.duration,
-      0
-    );
+  function formatDuration(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    if (minutes > 60) {
+      return `${Math.floor(minutes / 60)}h ${
+        minutes % 60
+      }m ${remainingSeconds}s`;
+    }
+    return `${minutes}m ${remainingSeconds}s`;
   }
 
   function calculateTotalWeight() {
@@ -90,7 +94,7 @@ export default function WorkoutCard({ workout }) {
       </div>
       <div className={styles.stats}>
         <p>
-          <FontAwesomeIcon icon={faClock} /> {calculateTotalDuration()} mins
+          <FontAwesomeIcon icon={faClock} /> {formatDuration(workout.duration)}
         </p>
         <p>
           <FontAwesomeIcon icon={faRunning} />{' '}
