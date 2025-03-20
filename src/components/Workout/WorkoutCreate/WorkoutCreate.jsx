@@ -98,7 +98,7 @@ const workoutReducer = (state, action) => {
                 ...exercise,
                 sets: exercise.sets.map((set, index) =>
                   index === action.payload.setIndex
-                    ? { ...set, isComplete: true }
+                    ? { ...set, isComplete: !set.isComplete }
                     : set
                 ),
               }

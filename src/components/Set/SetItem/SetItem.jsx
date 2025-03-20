@@ -8,8 +8,15 @@ export default function SetItem({ set, exercise, dispatch, index }) {
   const quantityPlaceholder = isStrength ? 'Weight' : 'Distance';
   const quantityStep = isStrength ? '0.5' : '0.01';
 
+  // Determine if this set is complete
+  const isComplete = set.isComplete || false;
+
   return (
-    <div className={styles.setItem}>
+    <div
+      className={`${styles.setItem} ${
+        isComplete ? styles.completedSet : styles.incompleteSet
+      }`}
+    >
       <div className={styles.setNumber}>{index + 1}</div>
 
       {/* First input field - Reps or Time */}
@@ -33,6 +40,7 @@ export default function SetItem({ set, exercise, dispatch, index }) {
           placeholder={unitPlaceholder}
           min='0'
           aria-label={`${unitPlaceholder} for set ${index + 1}`}
+          disabled={isComplete}
         />
       </div>
 
@@ -58,13 +66,16 @@ export default function SetItem({ set, exercise, dispatch, index }) {
           min='0'
           step={quantityStep}
           aria-label={`${quantityPlaceholder} for set ${index + 1}`}
+          disabled={isComplete}
         />
       </div>
 
       <div className={styles.setBtn}>
         <button
           type='button'
-          className={styles.completeSetButton}
+          className={`${styles.completeSetButton} ${
+            isComplete ? styles.completedButton : styles.incompleteButton
+          }`}
           onClick={() =>
             dispatch({
               type: 'completeSet',
