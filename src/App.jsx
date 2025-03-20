@@ -1,5 +1,5 @@
-import React, { useReducer } from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React, { useReducer, useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import styles from './app.module.css';
 import Home from './components/Layout/Home';
 import Footer from './components/Layout/Footer';
@@ -15,6 +15,16 @@ import { initialWorkoutData } from './temp/data/workout.js';
 
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    //check if user is stored in localStorage
+    const storeUser = JSON.parse(localStorage.getItem("user"));
+    if(storeUser) {
+      setUser(storeUser);
+    }
+  }, []);
+
   const reducer = (state, action) => {
     switch (action.type) {
       case 'cancelWorkout':
@@ -46,14 +56,25 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/user-dashboard" element={<UserDashboard />} />
-        <Route
+        {user ? (
+                        <>
+                            <Route path="/workouts" element={<WorkoutHistory workouts={workouts} />} />
+                            <Route path="/workout/create" element={<WorkoutCreate dispatch={dispatch} />}/>
+                        </>
+                    ) : (
+                        <>
+                            <Route path="/workouts" element={<Navigate to="/login" />} />
+                            <Route path="/workout/create" element={<Navigate to="/login" />} />
+                        </>
+                    )}
+        {/* <Route
             path='/workouts'
             element={<WorkoutHistory workouts={workouts} />}
           />
           <Route
             path='/workout/create'
             element={<WorkoutCreate dispatch={dispatch} />}
-          />
+          /> */}
       </Routes>
       <Footer />
     </div>
