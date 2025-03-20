@@ -68,3 +68,7 @@ exports.ExercisesByType = async function (req, res, next) {
   const exercises = await require('../data/exercise.json').filter((exercise) => exercise.type === exerciseType);
   res.json(exercises);
 };
+
+exports.ExercisesByUserId = async function (req, res, next) {
+  const userId = req.params.userId;
+};

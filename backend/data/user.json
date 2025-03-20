@@ -1,24 +1,24 @@
 [
   {
-    "id": "1",
+    "id": 1,
     "fname": "gurdeep",
     "lname": "kaur",
     "email": "g@home.com"
   },
   {
-    "id": "2",
+    "id": 2,
     "fname": "ryan",
     "lname": "burns",
     "email": "r@home.com"
   },
   {
-    "id": "3",
+    "id": 3,
     "fname": "sam",
     "lname": "maqsoudi",
     "email": "s@home.com"
   },
   {
-    "id": "4",
+    "id": 4,
     "fname": "marc",
     "lname": "baron",
     "email": "m@home.com"
