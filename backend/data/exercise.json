@@ -1,20 +1,32 @@
 [
   {
-    "id": "1",
-    "name": "bench press",
-    "type": "muscle",
-    "recipe": ["reps", "weight"]
+    "id": 1,
+    "exerciseId": 1,
+    "sets": [1, 2, 3, 4]
   },
   {
-    "id": "2",
-    "name": "run",
-    "type": "cardio",
-    "recipe": ["distance", "time"]
+    "id": 2,
+    "exerciseId": 2,
+    "sets": [5, 6]
   },
   {
-    "id": "3",
-    "name": "leg press",
-    "type": "muscle",
-    "recipe": ["reps", "weight"]
+    "id": 3,
+    "exerciseId": 1,
+    "sets": [7, 8, 9]
+  },
+  {
+    "id": 4,
+    "exerciseId": 1,
+    "sets": [10, 11]
+  },
+  {
+    "id": 5,
+    "exerciseId": 2,
+    "sets": [12]
+  },
+  {
+    "id": 6,
+    "exerciseId": 3,
+    "sets": [13, 14, 15]
   }
 ]
