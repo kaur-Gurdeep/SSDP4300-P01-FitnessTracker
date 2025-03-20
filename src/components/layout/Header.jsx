@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import styles from './layout.module.css'; // Import the CSS module
+import styles from './layout.module.css'; 
 import Logo from "../../assets/logo.png";
 import Bars from "../../assets/bars.png";
 import { Link } from "react-router-dom";
+
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -11,14 +12,13 @@ const Header = () => {
   // Dynamically update screen size
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
     <div className={styles['header']}>
       <img src={Logo} alt="fitness tracker logo" className={styles['logo']} />
-
       {menuOpened === false && isMobile ? (
         <div
           style={{
@@ -49,6 +49,12 @@ const Header = () => {
           </li>
           <li onClick={() => setMenuOpened(false)}>
             <Link to="/contact">Contact</Link>
+          </li>
+          <li onClick={() => setMenuOpened(false)}>
+            <Link to='/workouts'>Workouts</Link>
+          </li>
+          <li onClick={() => setMenuOpened(false)}>
+            <Link to='/workout/create'>Create Workout</Link>
           </li>
           <li onClick={() => setMenuOpened(false)}>
             <Link to="/login">Login</Link>

@@ -1,0 +1,105 @@
+.exerciseItem {
+  padding: 1.25rem;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.exerciseItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.exerciseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.exerciseName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+}
+
+.exerciseHeader button {
+  border: none;
+  background-color: rgba(159, 1, 1, 0.2);
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exerciseHeader button:hover {
+  background-color: rgba(159, 1, 1, 0.8);
+  color: white;
+  transform: scale(1.05);
+}
+
+.setsContainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.setHeader {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 70px 1fr 1fr 70px;
+  gap: 10px;
+  padding: 8px 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.08);
+  margin-bottom: 10px;
+}
+
+.addSetButton {
+  margin-top: 1rem;
+  align-self: center;
+  background-color: var(--green);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addSetButton:hover {
+  background-color: var(--greenHover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(32, 112, 44, 0.3);
+}
+
+.addSetButton:active {
+  transform: translateY(1px);
+}
+
+.exerciseType {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: -0.25rem;
+  margin-bottom: 0.5rem;
+}

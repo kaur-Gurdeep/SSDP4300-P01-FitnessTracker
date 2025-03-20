@@ -24,12 +24,27 @@ body {
 :root {
   --lightgray: #d9d9d9;
   --green: rgb(32 112 44);
+  --greenHover: rgb(21, 77, 30);
   --gray: #9c9c9c;
   --orange: #f48915;
+  --orangeHover: rgb(177, 98, 14);
   --darkGrey: #464d53;
   --caloryCard: #656565;
   --appColor: #3c3f45;
   --planCard: linear-gradient(210.41deg, #b2b1af 1.14%, #478648 100.75%);
+}
+
+/* Hide spinners */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 
 .stroke-text {
