@@ -1,9 +1,8 @@
 .exerciseItem {
-  border: 1px solid #ccc;
   padding: 10px;
-  margin-bottom: 10px;
   width: 100%;
-  max-width: 400px;
+  display: flex;
+  flex-direction: column;
   border-radius: 8px;
 }
 
@@ -11,7 +10,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .exerciseHeader button {

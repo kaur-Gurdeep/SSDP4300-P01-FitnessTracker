@@ -123,7 +123,7 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
 
   return (
     <div className={styles.createWorkout}>
-      <div className='workoutHeader'>
+      <div className={styles.workoutHeader}>
         {/* Workout Name Input */}
         <label htmlFor='workoutName' hidden>
           Workout Name
@@ -139,6 +139,9 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
             })
           }
         />
+        <button className={styles.finishWorkoutBtn}>
+          <FontAwesomeIcon icon={faSquareCheck} />
+        </button>
       </div>
 
       {/* Exercise Selector */}
@@ -171,12 +174,11 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
       </div>
 
       {/* Display selected exercises */}
-      <div className={styles.selectedExercises}>
-        <h3>Selected Exercises</h3>
+      <div className={styles.workoutExercises}>
         {workout.exercises.length === 0 ? (
           <p>No exercises added yet</p>
         ) : (
-          <ul>
+          <div className={styles.workoutExercise}>
             {workout.exercises.map((exercise, index) => (
               <ExerciseItem
                 key={index}
@@ -185,7 +187,7 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
                 exerciseIndex={index}
               />
             ))}
-          </ul>
+          </div>
         )}
       </div>
 
