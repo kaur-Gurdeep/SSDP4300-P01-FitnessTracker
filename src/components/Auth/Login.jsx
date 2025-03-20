@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./auth.css";
+import styles from "./auth.module.css"; // Import the CSS module
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,22 +13,54 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+    // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Logged In:", formData);
+  //   navigate("/user-dashboard"); // Redirect to Dashboard after login-will chnage later
+  // };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Logged In:", formData);
-    navigate("/home"); // Redirect to Dashboard after login-will chnage later
+    // Get stored user data from localStorage
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    
+    // Check if the credentials match the stored data
+    if (
+      storedUser && 
+      storedUser.email === formData.email && 
+      storedUser.password === formData.password
+    ) {
+      console.log("Logged In:", storedUser);
+      navigate("/user-dashboard"); // Redirect to Dashboard after login
+    } else {
+      alert("Invalid login credentials");
+    }
   };
 
   return (
-    <div className="auth-container">
+    <div className={styles['auth-container']}> 
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Email" required onChange={handleChange} />
-        <input type="password" name="password" placeholder="Password" required onChange={handleChange} />
-        <button type="submit" className="btn">Sign In</button>
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Email" 
+          required 
+          onChange={handleChange} 
+        />
+        <input 
+          type="password" 
+          name="password" 
+          placeholder="Password" 
+          required 
+          onChange={handleChange} 
+        />
+        <button type="submit" className={styles['btn']}> 
+          Sign In
+        </button>
       </form>
 
-      <p className="switch-auth">
+      <p className={styles['switch-auth']}> 
         Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
     </div>

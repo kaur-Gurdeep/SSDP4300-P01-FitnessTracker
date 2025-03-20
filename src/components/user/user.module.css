@@ -1,0 +1,190 @@
+/* Container Styling */
+.user-dashboard-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Info Panel */
+.info-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.right-panel {
+  display: flex;
+  gap: 1rem;
+  flex: 3;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Action Buttons */
+.action-btn {
+  background: var(--planCard);
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  text-align: center;
+  transition: background 0.3s ease-in-out;
+}
+
+.action-btn button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  background-color: #545454; 
+  color: white;
+}
+
+.action-btn button:hover {
+  background-color: #656565;
+  transform: scale(1.05);
+}
+
+.action-btn button:active {
+  transform: scale(0.95);
+}
+
+
+/* User Card */
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(168, 118, 61, 0.2);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+/* Buttons */
+.btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.profile-btn,
+.logout-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profile-btn {
+  background-color: var(--orange);
+  color: white;
+}
+
+.logout-btn {
+  background-color: #890602;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: #9f0803;
+}
+
+/* Main Dashboard */
+.main-dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 280px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Workout History */
+.section ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.section ul li {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px;
+  border-radius: 5px;
+  margin: 5px 0;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Progress Circle */
+.progress-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 10px solid #4caf50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+  margin: 0 auto;
+}
+
+/* Responsive Layout */
+@media (max-width: 700px) {
+  .info-panel {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .right-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-sections {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section {
+    width: 100%;
+  }
+}
