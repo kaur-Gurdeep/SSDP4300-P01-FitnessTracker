@@ -1,131 +1,214 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './WorkoutCreate.module.css';
-import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import {
+  faCheck,
+  faPlus,
+  faPlay,
+  faPause,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
+import { useReducer, useState } from 'react';
 import ExerciseItem from '../../Exercise/ExerciseItem/ExerciseItem';
+import { exercisesDatabase } from '../../../temp/data/exercise';
+import WorkoutTimer from '../WorkoutTimer/WorkoutTimer';
 
-const exercises = [
-  {
-    id: 'bench-press',
-    name: 'Bench Press',
-    type: 'Strength',
-    sets: [
-      { reps: 10, weight: 100 },
-      { reps: 10, weight: 100 },
-      { reps: 10, weight: 100 },
-      { reps: 10, weight: 150 },
-    ],
-  },
-  {
-    id: 'squats',
-    name: 'Squats',
-    type: 'Strength',
-    sets: [
-      { reps: 6, weight: 250 },
-      { reps: 6, weight: 250 },
-      { reps: 6, weight: 250 },
-      { reps: 6, weight: 300 },
-    ],
-  },
-  {
-    id: 'clean-jerk',
-    name: 'Clean & Jerk',
-    type: 'Strength',
-    sets: [
-      { reps: 5, weight: 100 },
-      { reps: 6, weight: 150 },
-      { reps: 5, weight: 200 },
-      { reps: 5, weight: 225 },
-      { reps: 3, weight: 250 },
-    ],
-  },
-  {
-    id: 'running',
-    name: 'Running',
-    type: 'Cardio',
-    sets: [
-      { distance: 1000, time: 30 },
-      { distance: 2000, time: 70 },
-      { distance: 3000, time: 120 },
-    ],
-  },
-  {
-    id: 'swimming',
-    name: 'Swimming',
-    type: 'Cardio',
-    sets: [
-      { distance: 300, time: 120 },
-      { distance: 300, time: 120 },
-      { distance: 300, time: 135 },
-    ],
-  },
-  {
-    id: 'cycling',
-    name: 'Cycling',
-    type: 'Cardio',
-    sets: [
-      { distance: 2000, time: 400 },
-      { distance: 2000, time: 430 },
-      { distance: 2000, time: 380 },
-    ],
-  },
-];
+// Workout reducer function
+const workoutReducer = (state, action) => {
+  switch (action.type) {
+    case 'updateName':
+      return { ...state, name: action.payload };
 
-export default function WorkoutCreate({ dispatch }) {
-  const [workoutName, setWorkoutName] = useState('');
+    case 'updateDuration':
+      return { ...state, duration: action.payload };
+
+    case 'addExercise':
+      return {
+        ...state,
+        exercises: [
+          ...state.exercises,
+          { ...action.payload, id: state.exercises.length + 1 },
+        ],
+      };
+
+    case 'removeExercise':
+      return {
+        ...state,
+        exercises: state.exercises.filter(
+          (_, index) => index !== action.payload.exerciseIndex
+        ),
+      };
+
+    case 'addSet':
+      return {
+        ...state,
+        exercises: state.exercises.map((exercise) =>
+          exercise.id === action.payload.exerciseId
+            ? {
+                ...exercise,
+                sets: [
+                  ...exercise.sets,
+                  { unit: 0, quantity: 0, isComplete: false },
+                ],
+              }
+            : exercise
+        ),
+      };
+
+    case 'removeSet':
+      return {
+        ...state,
+        exercises: state.exercises.map((exercise) =>
+          exercise.id === action.payload.exerciseId
+            ? {
+                ...exercise,
+                sets: exercise.sets.filter(
+                  (_, index) => index !== action.payload.setIndex
+                ),
+              }
+            : exercise
+        ),
+      };
+
+    case 'updateSet':
+      return {
+        ...state,
+        exercises: state.exercises.map((exercise) =>
+          exercise.id === action.payload.exerciseId
+            ? {
+                ...exercise,
+                sets: exercise.sets.map((set, index) =>
+                  index === action.payload.setIndex
+                    ? {
+                        ...set,
+                        [action.payload.field]: Number(action.payload.value),
+                      }
+                    : set
+                ),
+              }
+            : exercise
+        ),
+      };
+
+    case 'completeSet':
+      return {
+        ...state,
+        exercises: state.exercises.map((exercise) =>
+          exercise.id === action.payload.exerciseId
+            ? {
+                ...exercise,
+                sets: exercise.sets.map((set, index) =>
+                  index === action.payload.setIndex
+                    ? { ...set, isComplete: !set.isComplete }
+                    : set
+                ),
+              }
+            : exercise
+        ),
+      };
+
+    case 'resetWorkout':
+      return {
+        name: '',
+        date: new Date().toISOString(),
+        exercises: [],
+        duration: 0,
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default function WorkoutCreate({ dispatch: appDispatch }) {
+  const [workout, workoutDispatch] = useReducer(workoutReducer, {
+    name: '',
+    date: new Date().toISOString(),
+    exercises: [],
+    duration: 0,
+  });
   const [selectedExerciseId, setSelectedExerciseId] = useState('');
-  const [workoutExercises, setWorkoutExercises] = useState([]);
+  const [isWorkoutActive, setIsWorkoutActive] = useState(false);
 
-  const addExerciseToWorkout = () => {
+  const addExercise = () => {
     if (!selectedExerciseId) return;
 
-    const exerciseToAdd = exercises.find((ex) => ex.id === selectedExerciseId);
+    const exerciseToAdd = exercisesDatabase.find(
+      (ex) => ex.id === selectedExerciseId
+    );
     if (exerciseToAdd) {
-      // Add a copy of the exercise to prevent modifying the original
-      setWorkoutExercises([...workoutExercises, { ...exerciseToAdd }]);
-      setSelectedExerciseId(''); // Reset selection
+      workoutDispatch({
+        type: 'addExercise',
+        payload: { ...exerciseToAdd, sets: [{ unit: 0, quantity: 0 }] },
+      });
+      setSelectedExerciseId('');
     }
-  };
-
-  const removeExerciseFromWorkout = (exerciseId) => {
-    setWorkoutExercises(workoutExercises.filter((ex) => ex.id !== exerciseId));
   };
 
   const createWorkout = (e) => {
     e.preventDefault();
 
-    if (!workoutName.trim() || workoutExercises.length === 0) {
+    if (!workout.name.trim() || workout.exercises.length === 0) {
       alert('Please provide a workout name and at least one exercise');
       return;
     }
 
-    // Create the workout object without ID and date - reducer will handle those
-    const newWorkout = {
-      name: workoutName,
-      exercises: workoutExercises,
-    };
+    appDispatch({ type: 'addWorkout', payload: workout });
+    workoutDispatch({ type: 'resetWorkout' });
+    setSelectedExerciseId('');
+  };
 
-    // Dispatch to add the workout to the global state
-    dispatch({ type: 'addWorkout', payload: newWorkout });
+  const cancelWorkout = (e) => {
+    e.preventDefault();
+    workoutDispatch({ type: 'resetWorkout' });
+  };
 
-    // Reset form
-    setWorkoutName('');
-    setWorkoutExercises([]);
+  const handleTimerUpdate = (seconds) => {
+    workoutDispatch({
+      type: 'updateDuration',
+      payload: seconds,
+    });
+  };
+
+  const toggleWorkout = () => {
+    setIsWorkoutActive((prevState) => !prevState);
   };
 
   return (
     <div className={styles.createWorkout}>
-      <div className='workoutHeader'>
+      <div className={styles.workoutHeader}>
+        {/* Timer Display */}
+        <div className={styles.timerSection}>
+          <WorkoutTimer
+            isRunning={isWorkoutActive}
+            onTimerUpdate={handleTimerUpdate}
+          />
+        </div>
+
         {/* Workout Name Input */}
         <label htmlFor='workoutName' hidden>
           Workout Name
         </label>
         <input
           type='text'
+          id='workoutName'
           placeholder='Workout Name'
-          value={workoutName}
-          onChange={(e) => setWorkoutName(e.target.value)}
+          value={workout.name}
+          onChange={(e) =>
+            workoutDispatch({
+              type: 'updateName',
+              payload: e.target.value,
+            })
+          }
         />
+        <button
+          type='submit'
+          className={styles.createBtn}
+          onClick={createWorkout}
+          disabled={!workout.name.trim() || workout.exercises.length === 0}
+          aria-label='Create workout'
+        >
+          <FontAwesomeIcon icon={faCheck} />
+        </button>
       </div>
 
       {/* Exercise Selector */}
@@ -133,12 +216,11 @@ export default function WorkoutCreate({ dispatch }) {
         <select
           name='exercise'
           id='exercise'
-          className={styles.exerciseSelector}
           value={selectedExerciseId}
           onChange={(e) => setSelectedExerciseId(e.target.value)}
         >
           <option value=''>Select Exercise</option>
-          {exercises.map((exercise) => (
+          {exercisesDatabase.map((exercise) => (
             <option key={exercise.id} value={exercise.id}>
               {exercise.name}
             </option>
@@ -147,39 +229,44 @@ export default function WorkoutCreate({ dispatch }) {
         <button
           type='button'
           className={styles.addBtn}
-          onClick={addExerciseToWorkout}
+          onClick={addExercise}
+          disabled={!selectedExerciseId}
+          aria-label='Add exercise'
         >
-          <FontAwesomeIcon icon={faSquareCheck} />
+          <FontAwesomeIcon icon={faPlus} /> Add Exercise
         </button>
       </div>
 
       {/* Display selected exercises */}
-      <div className={styles.selectedExercises}>
-        <h3>Selected Exercises</h3>
-        {workoutExercises.length === 0 ? (
+      <div className={styles.workoutExercises}>
+        {workout.exercises.length === 0 ? (
           <p>No exercises added yet</p>
         ) : (
-          <ul>
-            {workoutExercises.map((exercise) => (
+          <div className={styles.workoutExercise}>
+            {workout.exercises.map((exercise, index) => (
               <ExerciseItem
-                key={`${exercise.id}-${Math.random()}`}
+                key={index}
                 exercise={exercise}
-                onRemove={removeExerciseFromWorkout}
+                dispatch={workoutDispatch}
+                exerciseIndex={index}
               />
             ))}
-          </ul>
+          </div>
         )}
       </div>
 
       {/* Create Workout Button */}
       <div className={styles.formActions}>
         <button
-          type='submit'
-          className={styles.createBtn}
-          onClick={createWorkout}
-          disabled={!workoutName.trim() || workoutExercises.length === 0}
+          onClick={toggleWorkout}
+          className={isWorkoutActive ? styles.pauseBtn : styles.startBtn}
         >
-          Create Workout
+          <FontAwesomeIcon icon={isWorkoutActive ? faPause : faPlay} />
+          {isWorkoutActive ? 'Pause Workout' : 'Start Workout'}
+        </button>
+        <button onClick={cancelWorkout} className={styles.cancelBtn}>
+          <FontAwesomeIcon icon={faTimes} />
+          Cancel Workout
         </button>
       </div>
     </div>

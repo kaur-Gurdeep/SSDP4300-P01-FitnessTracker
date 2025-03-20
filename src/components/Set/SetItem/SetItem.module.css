@@ -1,17 +1,79 @@
 .setItem {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr 70px;
+  gap: 10px;
   align-items: center;
-  justify-content: space-between;
-  /* background-color: #f1f3f5; */
-  border-radius: 4px;
-  padding: 8px;
-  margin: 8px 0;
+  justify-items: center;
+  padding: 12px 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.setItem:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Style for completed sets */
+.completedSet {
+  background-color: rgba(32, 112, 44, 0.15);
+  border-left: 3px solid var(--green);
+}
+
+.completedSet:hover {
+  background-color: rgba(32, 112, 44, 0.25);
+  border-color: var(--green);
+}
+
+.completedSet .setNumber {
+  background-color: rgba(32, 112, 44, 0.5);
+}
+
+.completedSet .completeSetButton {
+  color: white;
+  background-color: var(--green);
+}
+
+/* Style for incomplete sets */
+.incompleteSet {
+  border-left: 3px solid transparent;
+}
+
+.incompleteSet:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Style for complete/incomplete buttons */
+.completedButton {
+  color: white;
+  background-color: var(--green);
+}
+
+.incompleteButton {
+  color: var(--green);
+  background-color: rgba(32, 112, 44, 0.1);
+}
+
+.incompleteButton:hover {
+  color: white;
+  background-color: var(--green);
+  transform: scale(1.1);
 }
 
 .setNumber {
-  font-weight: 500;
-  margin-bottom: 5px;
+  font-weight: 600;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .setFields {
@@ -28,6 +90,7 @@
 .inputGroup label {
   font-size: 0.8rem;
   margin-bottom: 2px;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .inputGroup input {
@@ -35,4 +98,78 @@
   border: 1px solid #ced4da;
   border-radius: 3px;
   font-size: 0.9rem;
+}
+
+.inputField {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputField input {
+  width: 80%;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.inputField input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.inputField input:focus {
+  outline: none;
+  border-color: var(--green);
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 2px rgba(32, 112, 44, 0.2);
+}
+
+.setBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.completeSetButton,
+.deleteButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.completeSetButton {
+  color: var(--green);
+  background-color: rgba(32, 112, 44, 0.1);
+}
+
+.completeSetButton:hover {
+  color: white;
+  background-color: var(--green);
+  transform: scale(1.1);
+}
+
+.deleteButton {
+  color: var(--orange);
+  background-color: rgba(244, 137, 21, 0.1);
+}
+
+.deleteButton:hover {
+  color: white;
+  background-color: var(--orange);
+  transform: scale(1.1);
 }

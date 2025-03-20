@@ -14,7 +14,8 @@ import WorkoutCreate from './components/Workout/WorkoutCreate/WorkoutCreate';
 function App() {
   const reducer = (state, action) => {
     switch (action.type) {
-      case 'addExercise':
+      case 'cancelWorkout':
+        // route to home
         return state;
       case 'setWorkouts': // ADDED BY MARC
         return action.payload;
@@ -50,7 +51,7 @@ function App() {
     };
     fetchWorkouts();
   }, []);
-
+  
   // MARC INSERT ============
 
   return (
