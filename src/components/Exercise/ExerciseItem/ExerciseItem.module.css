@@ -24,13 +24,34 @@
 .exerciseHeader button:hover {
   color: var(--orange);
 }
-.setHeader {
+
+.setsContainer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.setHeader {
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr 70px;
+  gap: 10px;
+  padding: 8px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 10px;
 }
-.setHeader div {
-  display: flex;
-  gap: 10px;
+
+.addSetButton {
+  margin-top: 10px;
+  align-self: center;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.addSetButton:hover {
+  color: var(--orange);
 }

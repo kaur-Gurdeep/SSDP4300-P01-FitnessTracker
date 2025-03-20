@@ -22,21 +22,21 @@ export default function ExerciseItem({ exercise, dispatch, exerciseIndex }) {
       </div>
       <div className={styles.setsContainer}>
         <div className={styles.setHeader}>
-          {exercise.type === 'Strength' && (
-            <div>
-              <span>Set</span>
+          <span>Set</span>
+          {exercise.type === 'strength' ? (
+            <>
               <span>Reps</span>
               <span>Weight</span>
-            </div>
-          )}
-          {exercise.type === 'Cardio' && (
-            <div>
-              <span>Set</span>
+            </>
+          ) : (
+            <>
               <span>Time</span>
               <span>Distance</span>
-            </div>
+            </>
           )}
+          <span>Action</span>
         </div>
+
         {exercise.sets.map((set, index) => (
           <SetItem
             key={index}
@@ -46,8 +46,10 @@ export default function ExerciseItem({ exercise, dispatch, exerciseIndex }) {
             index={index}
           />
         ))}
+
         <button
           type='button'
+          className={styles.addSetButton}
           onClick={() =>
             dispatch({
               type: 'addSet',
@@ -55,7 +57,7 @@ export default function ExerciseItem({ exercise, dispatch, exerciseIndex }) {
             })
           }
         >
-          <FontAwesomeIcon icon={faSquareCheck} />
+          <FontAwesomeIcon icon={faSquareCheck} /> Add Set
         </button>
       </div>
     </div>

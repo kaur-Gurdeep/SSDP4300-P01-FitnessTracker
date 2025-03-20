@@ -7,124 +7,71 @@ export default function SetItem({ set, exercise, dispatch, index }) {
     <div className={styles.setItem}>
       <div className={styles.setNumber}>Set {index + 1}</div>
 
-      {exercise.type === 'Strength' ? (
-        // Strength exercise fields
-        <div className={styles.setFields}>
-          <div className={styles.inputGroup}>
-            <label htmlFor={`reps-${index}`} hidden></label>
-            <input
-              type='number'
-              id={`reps-${index}`}
-              name='reps'
-              value={set.unit || ''}
-              onChange={(e) =>
-                dispatch({
-                  type: 'updateSet',
-                  payload: {
-                    exerciseId: exercise.id,
-                    setIndex: index,
-                    field: 'unit',
-                    value: e.target.value,
-                  },
-                })
-              }
-              placeholder='Reps'
-              min='0'
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label htmlFor={`weight-${index}`} hidden></label>
-            <input
-              type='number'
-              id={`weight-${index}`}
-              name='weight'
-              value={set.quantity || ''}
-              onChange={(e) =>
-                dispatch({
-                  type: 'updateSet',
-                  payload: {
-                    exerciseId: exercise.id,
-                    setIndex: index,
-                    field: 'quantity',
-                    value: e.target.value,
-                  },
-                })
-              }
-              placeholder='Weight'
-              min='0'
-              step='0.1'
-            />
-          </div>
-        </div>
-      ) : (
-        // Cardio exercise fields
-        <div className={styles.setFields}>
-          <div className={styles.inputGroup}>
-            <label htmlFor={`distance-${index}`} hidden></label>
-            <input
-              type='number'
-              id={`distance-${index}`}
-              name='distance'
-              value={set.unit || ''}
-              onChange={(e) =>
-                dispatch({
-                  type: 'updateSet',
-                  payload: {
-                    exerciseId: exercise.id,
-                    setIndex: index,
-                    field: 'unit',
-                    value: e.target.value,
-                  },
-                })
-              }
-              placeholder='Distance'
-              min='0'
-              step='0.01'
-            />
-          </div>
-
-          <div className={styles.inputGroup}>
-            <label htmlFor={`time-${index}`} hidden></label>
-            <input
-              type='number'
-              id={`time-${index}`}
-              name='time'
-              value={set.quantity || ''}
-              onChange={(e) =>
-                dispatch({
-                  type: 'updateSet',
-                  payload: {
-                    exerciseId: exercise.id,
-                    setIndex: index,
-                    field: 'quantity',
-                    value: e.target.value,
-                  },
-                })
-              }
-              placeholder='Time'
-              min='0'
-            />
-          </div>
-        </div>
-      )}
-
-      <div>
-        <button
-          type='button'
-          onClick={() =>
+      {/* First input field - Reps or Time */}
+      <div className={styles.inputField}>
+        <input
+          type='number'
+          id={`${exercise.type === 'Strength' ? 'reps' : 'time'}-${index}`}
+          name={exercise.type === 'Strength' ? 'reps' : 'time'}
+          value={set.unit || ''}
+          onChange={(e) =>
             dispatch({
-              type: 'removeSet',
+              type: 'updateSet',
               payload: {
                 exerciseId: exercise.id,
                 setIndex: index,
+                field: 'unit',
+                value: e.target.value,
               },
             })
           }
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
+          placeholder={exercise.type === 'Strength' ? 'Reps' : 'Time'}
+          min='0'
+        />
       </div>
+
+      {/* Second input field - Weight or Distance */}
+      <div className={styles.inputField}>
+        <input
+          type='number'
+          id={`${
+            exercise.type === 'Strength' ? 'weight' : 'distance'
+          }-${index}`}
+          name={exercise.type === 'Strength' ? 'weight' : 'distance'}
+          value={set.quantity || ''}
+          onChange={(e) =>
+            dispatch({
+              type: 'updateSet',
+              payload: {
+                exerciseId: exercise.id,
+                setIndex: index,
+                field: 'quantity',
+                value: e.target.value,
+              },
+            })
+          }
+          placeholder={exercise.type === 'Strength' ? 'Weight' : 'Distance'}
+          min='0'
+          step={exercise.type === 'Strength' ? '0.5' : '0.01'}
+        />
+      </div>
+
+      {/* Delete button */}
+      <button
+        type='button'
+        className={styles.deleteButton}
+        onClick={() =>
+          dispatch({
+            type: 'removeSet',
+            payload: {
+              exerciseId: exercise.id,
+              setIndex: index,
+            },
+          })
+        }
+      >
+        <FontAwesomeIcon icon={faTrash} />
+      </button>
     </div>
   );
 }
