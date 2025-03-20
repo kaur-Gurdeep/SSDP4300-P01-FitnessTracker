@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./auth.module.css"; // Import the CSS module
 
 const Login = () => {
+  const [user, setUser] = useState(null);
+  
+    useEffect(() => {
+      //check if user is stored in localStorage
+      const storeUser = JSON.parse(localStorage.getItem("user"));
+      if(storeUser) {
+        setUser(storeUser);
+      }
+    }, []);
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -21,27 +31,46 @@ const Login = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Get stored user data from localStorage
     const storedUser = JSON.parse(localStorage.getItem("user"));
-    
-    // Check if the credentials match the stored data
+  
     if (
-      storedUser && 
-      storedUser.email === formData.email && 
+      storedUser &&
+      storedUser.email === formData.email &&
       storedUser.password === formData.password
     ) {
       console.log("Logged In:", storedUser);
-      navigate("/user-dashboard"); // Redirect to Dashboard after login
+      setUser(storedUser);
+      navigate("/user-dashboard"); 
+      
     } else {
       alert("Invalid login credentials");
     }
   };
+  
 
-  return (
-    <div className={styles['auth-container']}> 
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login"); // Redirect to login page after logout
+  };
+
+
+
+return (
+  <div className={styles["auth-container"]}>
+        {user ? (
+          <>
+            <h2>You are logged in</h2>
+            
+            <button onClick={handleLogout} className={styles["btn"]}>
+              Logout
+            </button>
+          </>
+        ) : (
+        <>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <input 
           type="email" 
           name="email" 
           placeholder="Email" 
@@ -63,8 +92,10 @@ const Login = () => {
       <p className={styles['switch-auth']}> 
         Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
-    </div>
-  );
+      </>
+    )}
+  </div>
+);
 };
 
 export default Login;
