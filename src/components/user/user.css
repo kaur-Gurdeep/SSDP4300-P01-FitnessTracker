@@ -1,59 +1,139 @@
-/* User.css */
-
 .user-dashboard-container {
   padding: 20px;
-  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-header {
+.info-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.right-panel {
+  display: flex;
+  gap: 1rem;
+  flex: 3;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-btn {
+  background-color: #ed9231d3;
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
   text-align: center;
-  margin-bottom: 20px;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(168 118 61 / 0.2);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.profile-btn,
+.logout-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profile-btn {
+  background-color: var(--orange);
+  color: white;
+}
+
+.logout-btn {
+  background-color: #890602;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: #9f0803;
+}
+
+.main-dashboard {
+  display: flex;
+  flex-direction: column;
 }
 
 .dashboard-sections {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
   justify-content: space-between;
+  gap: 20px;
 }
 
-.account-summary,
-.user-health-summary {
-  background-color: #fff;
+.section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 280px;
+  padding: 15px;
   border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 48%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
-h3 {
-  margin-bottom: 15px;
+.progress-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 10px solid #4caf50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
   font-size: 18px;
+  margin: 0 auto;
 }
 
-p {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
+@media (max-width: 700px) {
+  .info-panel {
+    flex-direction: column;
+    justify-content: center;
+  }
 
-.progress-bar-container {
-  width: 100%;
-  height: 10px;
-  background-color: #ddd;
-  border-radius: 5px;
-  margin-top: 10px;
-}
+  .right-panel {
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
+    align-items: center;
+  }
 
-.progress-bar {
-  height: 100%;
-  background-color: #4caf50;
-  border-radius: 5px;
-}
-
-.account-summary p,
-.user-health-summary p {
-  font-size: 16px;
-}
-
-.user-health-summary .progress-bar-container {
-  margin-top: 10px;
+  .dashboard-sections {
+    flex-direction: column;
+    align-items: center;
+  }
 }

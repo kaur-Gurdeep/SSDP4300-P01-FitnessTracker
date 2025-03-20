@@ -51,6 +51,9 @@ const Header = () => {
               <li onClick={() => setMenuOpened(false)}>
                 <Link to="/contact">Contact</Link>
               </li>
+              <li onClick={() => setMenuOpened(false)}>
+                <Link to="/login">Login</Link>
+              </li>
             </ul>
           )}
       </div>

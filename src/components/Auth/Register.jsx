@@ -22,17 +22,15 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Save the registered user data
+    // For now save the registered user data
     const newUser = {
       name: formData.name,
       email: formData.email,
+      password: formData.password,  // Save password as well
     };
 
-    // for now store the user data with localStorage
+    // Temporary use localStorage
     localStorage.setItem("user", JSON.stringify(newUser));
-
-    // Set user data in the parent component or global state
-    setUser(newUser);
 
     console.log("Registered:", newUser);
     navigate("/login"); // Redirect to Login after registration
@@ -42,9 +40,27 @@ const Register = () => {
     <div className="auth-container">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Full Name" required onChange={handleChange} />
-        <input type="email" name="email" placeholder="Email" required onChange={handleChange} />
-        <input type="password" name="password" placeholder="Password" required onChange={handleChange} />
+        <input 
+          type="text" 
+          name="name" 
+          placeholder="Full Name" 
+          required 
+          onChange={handleChange} 
+        />
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Email" 
+          required 
+          onChange={handleChange} 
+        />
+        <input 
+          type="password" 
+          name="password" 
+          placeholder="Password" 
+          required 
+          onChange={handleChange} 
+        />
         <button type="submit" className="btn">Sign Up</button>
       </form>
       
@@ -56,3 +72,7 @@ const Register = () => {
 };
 
 export default Register;
+
+
+
+  
