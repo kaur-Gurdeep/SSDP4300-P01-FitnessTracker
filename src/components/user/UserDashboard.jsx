@@ -3,9 +3,11 @@ import styles from './user.module.css';
 import Calendar from 'react-calendar'; 
 import 'react-calendar/dist/Calendar.css';
 import profilePic from '../../assets/placeholder.png';
+import { useNavigate } from 'react-router-dom';
 
 const UserDashboard = () => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate(); //hook for navigation
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('user');
@@ -23,6 +25,7 @@ const UserDashboard = () => {
   const handleLogout = () => {
     localStorage.removeItem('user');
     setUser(null);
+    navigate("/");
   };
 
   return (
