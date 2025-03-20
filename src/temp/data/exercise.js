@@ -2,37 +2,37 @@ const exercisesDatabase = [
   {
     id: '1',
     name: 'Bench Press',
-    type: 'Strength',
+    type: 'strength',
     sets: [],
   },
   {
     id: '2',
     name: 'Squats',
-    type: 'Strength',
+    type: 'strength',
     sets: [],
   },
   {
     id: '3',
     name: 'Clean & Jerk',
-    type: 'Strength',
+    type: 'strength',
     sets: [],
   },
   {
     id: '4',
     name: 'Running',
-    type: 'Cardio',
+    type: 'cardio',
     sets: [],
   },
   {
     id: '5',
     name: 'Swimming',
-    type: 'Cardio',
+    type: 'cardio',
     sets: [],
   },
   {
     id: '6',
     name: 'Cycling',
-    type: 'Cardio',
+    type: 'cardio',
     sets: [],
   },
 ];

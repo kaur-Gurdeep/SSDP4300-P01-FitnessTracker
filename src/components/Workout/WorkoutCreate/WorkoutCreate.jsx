@@ -65,7 +65,10 @@ const workoutReducer = (state, action) => {
                 ...exercise,
                 sets: exercise.sets.map((set, index) =>
                   index === action.payload.setIndex
-                    ? { ...set, [action.payload.field]: action.payload.value }
+                    ? {
+                        ...set,
+                        [action.payload.field]: Number(action.payload.value),
+                      }
                     : set
                 ),
               }

@@ -20,7 +20,7 @@ export default function WorkoutCard({ workout }) {
         total +
         exercise.sets.reduce((setTotal, set) => {
           if (exercise.type === 'strength') {
-            return setTotal + set.weight * set.reps;
+            return setTotal + set.quantity * set.unit;
           } else {
             return setTotal;
           }
@@ -35,7 +35,7 @@ export default function WorkoutCard({ workout }) {
         total +
         exercise.sets.reduce((setTotal, set) => {
           if (exercise.type === 'cardio') {
-            return setTotal + set.distance;
+            return setTotal + set.quantity;
           } else {
             return setTotal;
           }
@@ -48,16 +48,18 @@ export default function WorkoutCard({ workout }) {
     if (exercise.type === 'strength') {
       return exercise.sets.reduce(
         (bestSet, set) =>
-          set.weight * set.reps > bestSet.weight * bestSet.reps ? set : bestSet,
-        { weight: 0, reps: 0 }
+          set.quantity * set.unit > bestSet.quantity * bestSet.unit
+            ? set
+            : bestSet,
+        { quantity: 0, unit: 0 }
       );
     } else if (exercise.type === 'cardio') {
       return exercise.sets.reduce(
         (bestSet, set) =>
-          set.distance * set.time > bestSet.distance * bestSet.time
+          set.quantity * set.unit > bestSet.quantity * bestSet.unit
             ? set
             : bestSet,
-        { distance: 0, time: 0 }
+        { quantity: 0, unit: 0 }
       );
     }
   }
@@ -114,14 +116,14 @@ export default function WorkoutCard({ workout }) {
                 <td>{exercise.name}</td>
                 {exercise.type === 'strength' && (
                   <td>
-                    {calculateBestSet(exercise).weight}kg x{' '}
-                    {calculateBestSet(exercise).reps} reps
+                    {calculateBestSet(exercise).quantity}kg x{' '}
+                    {calculateBestSet(exercise).unit} reps
                   </td>
                 )}
                 {exercise.type === 'cardio' && (
                   <td>
-                    {calculateBestSet(exercise).distance}m x{' '}
-                    {calculateBestSet(exercise).time} s
+                    {calculateBestSet(exercise).quantity}m x{' '}
+                    {calculateBestSet(exercise).unit} s
                   </td>
                 )}
               </tr>
