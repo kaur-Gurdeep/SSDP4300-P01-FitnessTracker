@@ -1,11 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './WorkoutCreate.module.css';
-import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { useReducer, useState } from 'react';
 import ExerciseItem from '../../Exercise/ExerciseItem/ExerciseItem';
 import { exercisesDatabase } from '../../../temp/data/exercise';
-import WorkoutTimer from '../../WorkoutTimer';
-import '../../../../src/styles/WorkoutTimer.css';
+import WorkoutTimer from '../WorkoutTimer/WorkoutTimer';
 
 // Workout reducer function
 const workoutReducer = (state, action) => {
@@ -148,21 +147,17 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
     setIsWorkoutActive((prevState) => !prevState);
   };
 
-  const formatTime = (totalSeconds) => {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-
-    return [
-      hours.toString().padStart(2, '0'),
-      minutes.toString().padStart(2, '0'),
-      seconds.toString().padStart(2, '0'),
-    ].join(':');
-  };
-
   return (
     <div className={styles.createWorkout}>
       <div className={styles.workoutHeader}>
+        {/* Timer Display */}
+        <div className={styles.timerSection}>
+          <WorkoutTimer
+            isRunning={isWorkoutActive}
+            onTimerUpdate={handleTimerUpdate}
+          />
+        </div>
+
         {/* Workout Name Input */}
         <label htmlFor='workoutName' hidden>
           Workout Name
@@ -184,16 +179,8 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
           onClick={createWorkout}
           disabled={!workout.name.trim() || workout.exercises.length === 0}
         >
-          <FontAwesomeIcon icon={faSquareCheck} />
+          <FontAwesomeIcon icon={faCheck} />
         </button>
-      </div>
-
-      {/* Timer Display */}
-      <div className={styles.timerSection}>
-        <WorkoutTimer
-          isRunning={isWorkoutActive}
-          onTimerUpdate={handleTimerUpdate}
-        />
       </div>
 
       {/* Exercise Selector */}
@@ -256,13 +243,6 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
           Cancel Workout
         </button>
       </div>
-
-      {/* Display duration */}
-      {workout.duration > 0 && (
-        <div className={styles.durationInfo}>
-          <p>Workout Duration: {formatTime(workout.duration)}</p>
-        </div>
-      )}
     </div>
   );
 }
