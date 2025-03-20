@@ -1,6 +1,6 @@
 import styles from './SetItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function SetItem({ set, exercise, dispatch, index }) {
   return (
@@ -56,22 +56,38 @@ export default function SetItem({ set, exercise, dispatch, index }) {
         />
       </div>
 
-      {/* Delete button */}
-      <button
-        type='button'
-        className={styles.deleteButton}
-        onClick={() =>
-          dispatch({
-            type: 'removeSet',
-            payload: {
-              exerciseId: exercise.id,
-              setIndex: index,
-            },
-          })
-        }
-      >
-        <FontAwesomeIcon icon={faTrash} />
-      </button>
+      <div className={styles.setBtn}>
+        <button
+          type='button'
+          className={styles.completeSetButton}
+          onClick={() =>
+            dispatch({
+              type: 'completeSet',
+              payload: {
+                exerciseId: exercise.id,
+                setIndex: index,
+              },
+            })
+          }
+        >
+          <FontAwesomeIcon icon={faSquareCheck} />
+        </button>
+        <button
+          type='button'
+          className={styles.deleteButton}
+          onClick={() =>
+            dispatch({
+              type: 'removeSet',
+              payload: {
+                exerciseId: exercise.id,
+                setIndex: index,
+              },
+            })
+          }
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      </div>
     </div>
   );
 }

@@ -33,6 +33,7 @@
 
 .setHeader {
   display: grid;
+  justify-items: center;
   grid-template-columns: 70px 1fr 1fr 70px;
   gap: 10px;
   padding: 8px;
