@@ -1,0 +1,14 @@
+.workoutHistory {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .workoutHistory {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
