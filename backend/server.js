@@ -8,6 +8,13 @@ const path = require('path');
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
+// CORS setup
+const cors = require('cors');
+const corsOptions = {
+  origin: ['http://localhost:5173'],
+};
+app.use(cors(corsOptions));
+
 // AWS API Gateway
 const PORT = process.env.PORT || 3000;
 const API_GATEWAY_URL = process.env.API_GATEWAY_URL || 'http://localhost';
