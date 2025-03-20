@@ -2,14 +2,7 @@ import styles from './SetItem.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-export default function SetItem({
-  set,
-  exercise,
-  updateSet,
-  removeSet,
-  index,
-  exerciseIndex,
-}) {
+export default function SetItem({ set, exercise, dispatch, index }) {
   return (
     <div className={styles.setItem}>
       <div className={styles.setNumber}>Set {index + 1}</div>
@@ -25,9 +18,14 @@ export default function SetItem({
               name='reps'
               value={set.unit || ''}
               onChange={(e) =>
-                updateSet(exercise, index, {
-                  ...set,
-                  unit: e.target.value,
+                dispatch({
+                  type: 'updateSet',
+                  payload: {
+                    exerciseId: exercise.id,
+                    setIndex: index,
+                    field: 'unit',
+                    value: e.target.value,
+                  },
                 })
               }
               placeholder='Reps'
@@ -43,9 +41,14 @@ export default function SetItem({
               name='weight'
               value={set.quantity || ''}
               onChange={(e) =>
-                updateSet(exercise, index, {
-                  ...set,
-                  quantity: e.target.value,
+                dispatch({
+                  type: 'updateSet',
+                  payload: {
+                    exerciseId: exercise.id,
+                    setIndex: index,
+                    field: 'quantity',
+                    value: e.target.value,
+                  },
                 })
               }
               placeholder='Weight'
@@ -65,9 +68,14 @@ export default function SetItem({
               name='distance'
               value={set.unit || ''}
               onChange={(e) =>
-                updateSet(exercise, index, {
-                  ...set,
-                  unit: e.target.value,
+                dispatch({
+                  type: 'updateSet',
+                  payload: {
+                    exerciseId: exercise.id,
+                    setIndex: index,
+                    field: 'unit',
+                    value: e.target.value,
+                  },
                 })
               }
               placeholder='Distance'
@@ -84,9 +92,14 @@ export default function SetItem({
               name='time'
               value={set.quantity || ''}
               onChange={(e) =>
-                updateSet(exercise, index, {
-                  ...set,
-                  quantity: e.target.value,
+                dispatch({
+                  type: 'updateSet',
+                  payload: {
+                    exerciseId: exercise.id,
+                    setIndex: index,
+                    field: 'quantity',
+                    value: e.target.value,
+                  },
                 })
               }
               placeholder='Time'
@@ -97,7 +110,18 @@ export default function SetItem({
       )}
 
       <div>
-        <button type='button' onClick={() => removeSet(exerciseIndex, index)}>
+        <button
+          type='button'
+          onClick={() =>
+            dispatch({
+              type: 'removeSet',
+              payload: {
+                exerciseId: exercise.id,
+                setIndex: index,
+              },
+            })
+          }
+        >
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>

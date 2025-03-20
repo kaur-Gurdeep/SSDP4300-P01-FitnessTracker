@@ -1,12 +1,92 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './WorkoutCreate.module.css';
 import { faSquareCheck } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import ExerciseItem from '../../Exercise/ExerciseItem/ExerciseItem';
 import { exercisesDatabase } from '../../../temp/data/exercise';
 
-export default function WorkoutCreate({ dispatch }) {
-  const [workout, setWorkout] = useState({
+// Workout reducer function
+const workoutReducer = (state, action) => {
+  switch (action.type) {
+    case 'updateName':
+      return { ...state, name: action.payload };
+
+    case 'addExercise':
+      return {
+        ...state,
+        exercises: [
+          ...state.exercises,
+          { ...action.payload, id: state.exercises.length + 1 },
+        ],
+      };
+
+    case 'removeExercise':
+      return {
+        ...state,
+        exercises: state.exercises.filter(
+          (_, index) => index !== action.payload.exerciseIndex
+        ),
+      };
+
+    case 'addSet':
+      return {
+        ...state,
+        exercises: state.exercises.map((exercise) =>
+          exercise.id === action.payload.exerciseId
+            ? {
+                ...exercise,
+                sets: [...exercise.sets, { unit: 0, quantity: 0 }],
+              }
+            : exercise
+        ),
+      };
+
+    case 'removeSet':
+      return {
+        ...state,
+        exercises: state.exercises.map((exercise) =>
+          exercise.id === action.payload.exerciseId
+            ? {
+                ...exercise,
+                sets: exercise.sets.filter(
+                  (_, index) => index !== action.payload.setIndex
+                ),
+              }
+            : exercise
+        ),
+      };
+
+    case 'updateSet':
+      return {
+        ...state,
+        exercises: state.exercises.map((exercise) =>
+          exercise.id === action.payload.exerciseId
+            ? {
+                ...exercise,
+                sets: exercise.sets.map((set, index) =>
+                  index === action.payload.setIndex
+                    ? { ...set, [action.payload.field]: action.payload.value }
+                    : set
+                ),
+              }
+            : exercise
+        ),
+      };
+
+    case 'resetWorkout':
+      return {
+        name: '',
+        date: new Date().toISOString(),
+        exercises: [],
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default function WorkoutCreate({ dispatch: appDispatch }) {
+  const [workout, workoutDispatch] = useReducer(workoutReducer, {
     name: '',
     date: new Date().toISOString(),
     exercises: [],
@@ -20,75 +100,12 @@ export default function WorkoutCreate({ dispatch }) {
       (ex) => ex.id === selectedExerciseId
     );
     if (exerciseToAdd) {
-      setWorkout({
-        ...workout,
-        exercises: [
-          ...workout.exercises,
-          { ...exerciseToAdd, id: workout.exercises.length + 1 },
-        ],
+      workoutDispatch({
+        type: 'addExercise',
+        payload: { ...exerciseToAdd, sets: [{ unit: 0, quantity: 0 }] },
       });
       setSelectedExerciseId('');
     }
-  };
-
-  const removeExercise = (exerciseIndex) => {
-    setWorkout({
-      ...workout,
-      exercises: workout.exercises.filter(
-        (_, index) => index !== exerciseIndex
-      ),
-    });
-  };
-
-  const updateName = (e) => {
-    setWorkout({
-      ...workout,
-      name: e.target.value,
-    });
-  };
-
-  const addSet = (exerciseToAddSet) => {
-    setWorkout({
-      ...workout,
-      exercises: workout.exercises.map((exercise) =>
-        exercise.id === exerciseToAddSet.id
-          ? {
-              ...exercise,
-              sets: [...exercise.sets, { unit: 0, quantity: 0 }],
-            }
-          : exercise
-      ),
-    });
-  };
-
-  const removeSet = (exerciseIndex, setIndex) => {
-    setWorkout({
-      ...workout,
-      exercises: workout.exercises.map((exercise) =>
-        exercise.id === exerciseIndex
-          ? {
-              ...exercise,
-              sets: exercise.sets.filter((_, index) => index !== setIndex),
-            }
-          : exercise
-      ),
-    });
-  };
-
-  const updateSet = (exerciseIndex, setIndex, newSet) => {
-    setWorkout({
-      ...workout,
-      exercises: workout.exercises.map((exercise) =>
-        exercise.id === exerciseIndex
-          ? {
-              ...exercise,
-              sets: exercise.sets.map((set, index) =>
-                index === setIndex ? newSet : set
-              ),
-            }
-          : exercise
-      ),
-    });
   };
 
   const createWorkout = (e) => {
@@ -99,13 +116,8 @@ export default function WorkoutCreate({ dispatch }) {
       return;
     }
 
-    dispatch({ type: 'addWorkout', payload: workout });
-
-    setWorkout({
-      name: '',
-      date: new Date().toISOString(),
-      exercises: [],
-    });
+    appDispatch({ type: 'addWorkout', payload: workout });
+    workoutDispatch({ type: 'resetWorkout' });
     setSelectedExerciseId('');
   };
 
@@ -120,7 +132,12 @@ export default function WorkoutCreate({ dispatch }) {
           type='text'
           placeholder='Workout Name'
           value={workout.name}
-          onChange={updateName}
+          onChange={(e) =>
+            workoutDispatch({
+              type: 'updateName',
+              payload: e.target.value,
+            })
+          }
         />
       </div>
 
@@ -164,10 +181,8 @@ export default function WorkoutCreate({ dispatch }) {
               <ExerciseItem
                 key={index}
                 exercise={exercise}
-                removeExercise={() => removeExercise(index)}
-                addSet={addSet}
-                removeSet={removeSet}
-                updateSet={updateSet}
+                dispatch={workoutDispatch}
+                exerciseIndex={index}
               />
             ))}
           </ul>
