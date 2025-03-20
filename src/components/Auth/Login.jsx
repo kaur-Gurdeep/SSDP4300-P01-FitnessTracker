@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./auth.css";
+import styles from "./auth.module.css"; // Import the CSS module
 
 const Login = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-container">
+    <div className={styles['auth-container']}> 
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input 
@@ -55,10 +55,12 @@ const Login = () => {
           required 
           onChange={handleChange} 
         />
-        <button type="submit" className="btn">Sign In</button>
+        <button type="submit" className={styles['btn']}> 
+          Sign In
+        </button>
       </form>
 
-      <p className="switch-auth">
+      <p className={styles['switch-auth']}> 
         Don't have an account? <Link to="/register">Sign Up</Link>
       </p>
     </div>
@@ -66,6 +68,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
-

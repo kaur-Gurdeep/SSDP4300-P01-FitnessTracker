@@ -1,3 +1,4 @@
+/* Container Styling */
 .user-dashboard-container {
   padding: 20px;
   display: flex;
@@ -5,6 +6,7 @@
   gap: 20px;
 }
 
+/* Info Panel */
 .info-panel {
   display: flex;
   flex-wrap: wrap;
@@ -25,8 +27,9 @@
   align-items: center;
 }
 
+/* Action Buttons */
 .action-btn {
-  background-color: #ed9231d3;
+  background: var(--planCard);
   color: white;
   border: none;
   padding: 15px;
@@ -34,13 +37,38 @@
   border-radius: 5px;
   font-size: 16px;
   text-align: center;
+  transition: background 0.3s ease-in-out;
 }
 
+.action-btn button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  background-color: #545454; 
+  color: white;
+}
+
+.action-btn button:hover {
+  background-color: #656565;
+  transform: scale(1.05);
+}
+
+.action-btn button:active {
+  transform: scale(0.95);
+}
+
+
+/* User Card */
 .user-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(168 118 61 / 0.2);
+  background-color: rgba(168, 118, 61, 0.2);
   padding: 20px;
   border-radius: 10px;
 }
@@ -52,6 +80,7 @@
   margin-bottom: 10px;
 }
 
+/* Buttons */
 .btns {
   display: flex;
   gap: 10px;
@@ -81,6 +110,7 @@
   background-color: #9f0803;
 }
 
+/* Main Dashboard */
 .main-dashboard {
   display: flex;
   flex-direction: column;
@@ -106,6 +136,24 @@
   text-align: center;
 }
 
+/* Workout History */
+.section ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.section ul li {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px;
+  border-radius: 5px;
+  margin: 5px 0;
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Progress Circle */
 .progress-circle {
   width: 100px;
   height: 100px;
@@ -119,6 +167,7 @@
   margin: 0 auto;
 }
 
+/* Responsive Layout */
 @media (max-width: 700px) {
   .info-panel {
     flex-direction: column;
@@ -126,14 +175,16 @@
   }
 
   .right-panel {
-    flex-direction: row;
-    /* flex-wrap: wrap; */
-    /* justify-content: space-between; */
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .dashboard-sections {
     flex-direction: column;
     align-items: center;
+  }
+
+  .section {
+    width: 100%;
   }
 }

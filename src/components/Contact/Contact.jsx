@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/main.css';
+import styles from './contact.module.css';
 import { FaInstagram, FaFacebook } from 'react-icons/fa'; 
 
 const Contact = () => {
@@ -23,16 +23,15 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact-page">
-      <section className="contact-header">
-      <p>Got questions or feedback? We're here to help!💁‍♂️</p>
-
+    <div className={styles['contact-page']}>
+      <section className={styles['contact-header']}>
+        <p>Got questions or feedback? We're here to help!💁‍♂️</p>
       </section>
 
-      <div className="contact-content">
-        <section className="contact-form-section">
+      <div className={styles['contact-content']}>
+        <section className={styles['contact-form-section']}>
           <h2>Contact Form</h2>
-          <form onSubmit={handleSubmit} className="contact-form">
+          <form onSubmit={handleSubmit} className={styles['contact-form']}>
             <input
               type="text"
               name="name"
@@ -56,21 +55,22 @@ const Contact = () => {
               onChange={handleChange}
               required
             ></textarea>
-            <button type="submit" className="btn">Submit</button>
+            <button type="submit" className={styles.btn}>Submit</button>
           </form>
         </section>
 
-        <section className="contact-info-section">
+        <section className={styles['contact-info-section']}>
           <h2>Contact Information</h2>
           <ul>
             <li><strong>Email:</strong> support@fitnesstracker.com</li>
             <li><strong>Phone:</strong> (123) 456-7890</li>
             <li><strong>Follow Us: </strong> 
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-              <FaInstagram size={30} style={{ marginRight: '10px' }} />
+                <FaInstagram size={30} style={{ marginRight: '10px' }} />
               </a>
               <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-              <FaFacebook size={30} style={{ marginRight: '10px' }} /></a>
+                <FaFacebook size={30} style={{ marginRight: '10px' }} />
+              </a>
             </li>
           </ul>
         </section>

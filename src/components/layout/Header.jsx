@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import './layout.css';
+import styles from './layout.module.css'; // Import the CSS module
 import Logo from "../../assets/logo.png";
 import Bars from "../../assets/bars.png";
 import { Link } from "react-router-dom";
-
 
 const Header = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
@@ -17,46 +16,46 @@ const Header = () => {
   }, []);
 
   return (
-        <div className="header">
-          <img src={Logo} alt="fitness tracker logo" className="logo" />
+    <div className={styles['header']}>
+      <img src={Logo} alt="fitness tracker logo" className={styles['logo']} />
 
-          {menuOpened === false && isMobile ? (
-            <div
-              style={{
-                cursor: "pointer",
-                backgroundColor: "var(--appColor)",
-                padding: "0.5rem",
-                borderRadius: "5px",
-              }}
-              onClick={() => setMenuOpened(true)}
-            >
-              <img
-                src={Bars}
-                alt="hamburger"
-                style={{
-                  width: "1.5rem",
-                  height: "1.5rem",
-                  maxHeight: "100%", 
-                }}
-              />
-            </div>
-          ) : (
-            <ul className="header-menu">
-              <li onClick={() => setMenuOpened(false)}>
-                <Link to="/">Home</Link>
-              </li>
-              <li onClick={() => setMenuOpened(false)}>
-                <Link to="/about">About</Link>
-              </li>
-              <li onClick={() => setMenuOpened(false)}>
-                <Link to="/contact">Contact</Link>
-              </li>
-              <li onClick={() => setMenuOpened(false)}>
-                <Link to="/login">Login</Link>
-              </li>
-            </ul>
-          )}
-      </div>
+      {menuOpened === false && isMobile ? (
+        <div
+          style={{
+            cursor: "pointer",
+            backgroundColor: "var(--appColor)",
+            padding: "0.5rem",
+            borderRadius: "5px",
+          }}
+          onClick={() => setMenuOpened(true)}
+        >
+          <img
+            src={Bars}
+            alt="hamburger"
+            style={{
+              width: "1.5rem",
+              height: "1.5rem",
+              maxHeight: "100%",
+            }}
+          />
+        </div>
+      ) : (
+        <ul className={styles['header-menu']}>
+          <li onClick={() => setMenuOpened(false)}>
+            <Link to="/">Home</Link>
+          </li>
+          <li onClick={() => setMenuOpened(false)}>
+            <Link to="/about">About</Link>
+          </li>
+          <li onClick={() => setMenuOpened(false)}>
+            <Link to="/contact">Contact</Link>
+          </li>
+          <li onClick={() => setMenuOpened(false)}>
+            <Link to="/login">Login</Link>
+          </li>
+        </ul>
+      )}
+    </div>
   );
 };
 

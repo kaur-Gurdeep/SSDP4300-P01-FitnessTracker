@@ -1,9 +1,9 @@
 import React from 'react';
-import './layout.css';
+import styles from './layout.module.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className={styles.footer}>
       <p>&copy; 2025 Fitness Tracker App. All rights reserved.</p>
     </footer>
   );
