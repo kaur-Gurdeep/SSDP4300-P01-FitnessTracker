@@ -14,14 +14,17 @@ const initialWorkoutData = [
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
         ],
       },
@@ -33,14 +36,17 @@ const initialWorkoutData = [
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
         ],
       },
@@ -52,14 +58,17 @@ const initialWorkoutData = [
           {
             unit: 1000,
             quantity: 30,
+            isComplete: true,
           },
           {
             unit: 2000,
             quantity: 30,
+            isComplete: true,
           },
           {
             unit: 1000,
             quantity: 30,
+            isComplete: true,
           },
         ],
       },
@@ -79,14 +88,17 @@ const initialWorkoutData = [
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
         ],
       },
@@ -98,14 +110,17 @@ const initialWorkoutData = [
           {
             unit: 300,
             quantity: 120,
+            isComplete: true,
           },
           {
             unit: 200,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 200,
             quantity: 110,
+            isComplete: true,
           },
         ],
       },
@@ -125,14 +140,17 @@ const initialWorkoutData = [
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
         ],
       },
@@ -144,14 +162,17 @@ const initialWorkoutData = [
           {
             unit: 1000,
             quantity: 30,
+            isComplete: true,
           },
           {
             unit: 2000,
             quantity: 30,
+            isComplete: true,
           },
           {
             unit: 1000,
             quantity: 30,
+            isComplete: true,
           },
         ],
       },
@@ -163,14 +184,17 @@ const initialWorkoutData = [
           {
             unit: 300,
             quantity: 120,
+            isComplete: true,
           },
           {
             unit: 200,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 200,
             quantity: 110,
+            isComplete: true,
           },
         ],
       },
@@ -190,14 +214,17 @@ const initialWorkoutData = [
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
         ],
       },
@@ -209,14 +236,17 @@ const initialWorkoutData = [
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
         ],
       },
@@ -228,14 +258,17 @@ const initialWorkoutData = [
           {
             unit: 1000,
             quantity: 30,
+            isComplete: true,
           },
           {
             unit: 2000,
             quantity: 30,
+            isComplete: true,
           },
           {
             unit: 1000,
             quantity: 30,
+            isComplete: true,
           },
         ],
       },
@@ -247,14 +280,17 @@ const initialWorkoutData = [
           {
             unit: 300,
             quantity: 120,
+            isComplete: true,
           },
           {
             unit: 200,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 200,
             quantity: 110,
+            isComplete: true,
           },
         ],
       },
@@ -266,14 +302,17 @@ const initialWorkoutData = [
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
           {
             unit: 10,
             quantity: 100,
+            isComplete: true,
           },
         ],
       },

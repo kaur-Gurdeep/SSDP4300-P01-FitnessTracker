@@ -45,7 +45,10 @@ const workoutReducer = (state, action) => {
           exercise.id === action.payload.exerciseId
             ? {
                 ...exercise,
-                sets: [...exercise.sets, { unit: 0, quantity: 0 }],
+                sets: [
+                  ...exercise.sets,
+                  { unit: 0, quantity: 0, isComplete: false },
+                ],
               }
             : exercise
         ),
@@ -79,6 +82,23 @@ const workoutReducer = (state, action) => {
                         ...set,
                         [action.payload.field]: Number(action.payload.value),
                       }
+                    : set
+                ),
+              }
+            : exercise
+        ),
+      };
+
+    case 'completeSet':
+      return {
+        ...state,
+        exercises: state.exercises.map((exercise) =>
+          exercise.id === action.payload.exerciseId
+            ? {
+                ...exercise,
+                sets: exercise.sets.map((set, index) =>
+                  index === action.payload.setIndex
+                    ? { ...set, isComplete: true }
                     : set
                 ),
               }
