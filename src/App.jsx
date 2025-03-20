@@ -59,11 +59,13 @@ function App() {
                         <>
                             <Route path="/workouts" element={<WorkoutHistory workouts={workouts} />} />
                             <Route path="/workout/create" element={<WorkoutCreate dispatch={dispatch} />}/>
+                            <Route path="/user-dashboard" element={ <UserDashboard /> } />
                         </>
                     ) : (
                         <>
                             <Route path="/workouts" element={<Navigate to="/login" />} />
                             <Route path="/workout/create" element={<Navigate to="/login" />} />
+                            <Route path="/user-dashboard" element={<Navigate to="/login" />} />
                         </>
                     )}
         {/* <Route

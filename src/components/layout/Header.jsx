@@ -57,6 +57,9 @@ const Header = () => {
             <Link to='/workout/create'>Create Workout</Link>
           </li>
           <li onClick={() => setMenuOpened(false)}>
+            <Link to='/user-dashboard'>Dashboard</Link>
+          </li>
+          <li onClick={() => setMenuOpened(false)}>
             <Link to="/login">Login</Link>
           </li>
         </ul>
