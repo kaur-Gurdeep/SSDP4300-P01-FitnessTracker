@@ -121,6 +121,10 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
     setSelectedExerciseId('');
   };
 
+  const cancelWorkout = (e) => {
+    // navigate to home
+  };
+
   return (
     <div className={styles.createWorkout}>
       <div className={styles.workoutHeader}>
@@ -200,6 +204,9 @@ export default function WorkoutCreate({ dispatch: appDispatch }) {
           disabled={!workout.name.trim() || workout.exercises.length === 0}
         >
           Create Workout
+        </button>
+        <button onClick={cancelWorkout} className={styles.cancelBtn}>
+          Cancel Workout
         </button>
       </div>
     </div>

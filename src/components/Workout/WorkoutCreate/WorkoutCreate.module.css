@@ -24,9 +24,37 @@
 .finishWorkoutBtn {
   font-size: 1.5rem;
 }
+
 .workoutExercise {
   width: 100%;
   justify-content: center;
   flex-direction: column;
   display: flex;
+}
+
+.formActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.createBtn,
+.cancelBtn {
+  width: 60%;
+  border-radius: 8px;
+  border: 1px solid black;
+  padding: 5px;
+  font-size: 1rem;
+}
+
+.createBtn {
+  background-color: rgba(32, 112, 44, 1);
+  color: white;
+}
+
+.cancelBtn {
+  background-color: rgb(159, 1, 1);
+  color: white;
 }
