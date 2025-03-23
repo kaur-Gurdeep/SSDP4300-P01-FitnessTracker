@@ -100,7 +100,7 @@ const Home = () => {
             </div>
 
             {/* REVIEWS SECTION */}
-            <div className={styles['reviews-section']}>     
+            {/* <div className={styles['reviews-section']}>     
             <button className={`${styles['nav-button']} ${styles.left}`} onClick={prevReview}>
                 <FaArrowLeft />
             </button>
@@ -114,7 +114,7 @@ const Home = () => {
             <button className={`${styles['nav-button']} ${styles.right}`} onClick={nextReview}>
                 <FaArrowRight />
             </button>
-            </div>
+            </div> */}
         </>
     );
 };

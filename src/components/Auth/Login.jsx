@@ -39,9 +39,9 @@ const Login = () => {
       storedUser.password === formData.password
     ) {
       console.log("Logged In:", storedUser);
-      setUser(storedUser);
+      localStorage.setUser("user", JSON.stringify(storedUser)); 
+      // setUser(storedUser);
       navigate("/user-dashboard"); 
-      
     } else {
       alert("Invalid login credentials");
     }
