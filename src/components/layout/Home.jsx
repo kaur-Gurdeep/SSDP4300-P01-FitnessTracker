@@ -100,8 +100,8 @@ const Home = () => {
             </div>
 
             {/* REVIEWS SECTION */}
-            {/* <div className={styles['reviews-section']}>     
-            <button className={`${styles['nav-button']} ${styles.left}`} onClick={prevReview}>
+            <div className={styles['reviews-section']}>     
+            <button className={`${styles['review-button']} ${styles.left}`} onClick={prevReview}>
                 <FaArrowLeft />
             </button>
             <div className={styles['reviews-container']}>
@@ -111,10 +111,10 @@ const Home = () => {
                 <p className={styles['review-rating']}>{reviews[currentReview].rating}</p>
                 </div>
             </div>
-            <button className={`${styles['nav-button']} ${styles.right}`} onClick={nextReview}>
+            <button className={`${styles['review-button']} ${styles.right}`} onClick={nextReview}>
                 <FaArrowRight />
             </button>
-            </div> */}
+            </div>
         </>
     );
 };

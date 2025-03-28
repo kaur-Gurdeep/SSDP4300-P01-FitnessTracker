@@ -3,11 +3,11 @@ import styles from './user.module.css';
 import Calendar from 'react-calendar'; 
 import 'react-calendar/dist/Calendar.css';
 import profilePic from '../../assets/placeholder.png';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const UserDashboard = () => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate(); //hook for navigation
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const storedUserData = localStorage.getItem('user');
@@ -48,7 +48,9 @@ const UserDashboard = () => {
                     <div className={styles['action-btn']}>
                         <p><strong>Make Workout</strong></p>
                         <p>Create a customized workout plan that fits your goals.</p>
-                        <button>Start Now</button>
+                        <Link to='/workout/create'>
+                            <button>Start Now</button>
+                        </Link>
                     </div>
                     
                     <div className={styles['action-btn']}>
