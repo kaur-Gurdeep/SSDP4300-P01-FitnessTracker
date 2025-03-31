@@ -38,6 +38,8 @@ export const handler = async (event, context) => {
 
     // Set the table name instead of hardcoding in API or frontend
     event.payload.TableName = tableName;
+    console.log('tablename in payload: ' + event.payload.tableName);
+    console.log('event:::: ' + JSON.stringify(event));
     let response;
 
     // Performs actual operation on DDB table
