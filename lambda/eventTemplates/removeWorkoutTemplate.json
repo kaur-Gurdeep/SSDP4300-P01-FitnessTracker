@@ -1,0 +1,9 @@
+{
+  "operation": "deleteWorkout",
+  "payload": {
+    "Key": {
+      "id": ""
+    },
+    "TableName": ""
+  }
+}
