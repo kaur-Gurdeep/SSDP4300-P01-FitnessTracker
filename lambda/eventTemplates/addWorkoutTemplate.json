@@ -1,0 +1,80 @@
+{
+  "operation": "createWorkout",
+  "payload": {
+    "Item": {
+      "id": "1",
+      "date": "2025-03-16T10:30:00.000Z",
+      "name": "Workout 1",
+      "duration": 3900,
+      "exercises": [
+        {
+          "id": "bench-press",
+          "name": "Bench Press",
+          "type": "strength",
+          "sets": [
+            {
+              "unit": 10,
+              "quantity": 100,
+              "isComplete": true
+            },
+            {
+              "unit": 10,
+              "quantity": 100,
+              "isComplete": true
+            },
+            {
+              "unit": 10,
+              "quantity": 100,
+              "isComplete": true
+            }
+          ]
+        },
+        {
+          "id": "squats",
+          "name": "Squats",
+          "type": "strength",
+          "sets": [
+            {
+              "unit": 10,
+              "quantity": 100,
+              "isComplete": true
+            },
+            {
+              "unit": 10,
+              "quantity": 100,
+              "isComplete": true
+            },
+            {
+              "unit": 10,
+              "quantity": 100,
+              "isComplete": true
+            }
+          ]
+        },
+        {
+          "id": "running",
+          "name": "Running",
+          "type": "cardio",
+          "sets": [
+            {
+              "unit": 1000,
+              "quantity": 30,
+              "isComplete": true
+            },
+            {
+              "unit": 2000,
+              "quantity": 30,
+              "isComplete": true
+            },
+            {
+              "unit": 1000,
+              "quantity": 30,
+              "isComplete": true
+            }
+          ]
+        }
+      ]
+    },
+    "TableName": ""
+  }
+}
