@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ssdp4300p01fitnesstr-dev-7a4bc-authRole",
+      "UnauthRoleArn": "arn:aws:iam::593793036812:role/amplify-ssdp4300p01fitnesstr-dev-7a4bc-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::593793036812:role/amplify-ssdp4300p01fitnesstr-dev-7a4bc-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-ssdp4300p01fitnesstr-dev-7a4bc-deployment",
+      "UnauthRoleName": "amplify-ssdp4300p01fitnesstr-dev-7a4bc-unauthRole",
+      "StackName": "amplify-ssdp4300p01fitnesstr-dev-7a4bc",
+      "StackId": "arn:aws:cloudformation:us-west-2:593793036812:stack/amplify-ssdp4300p01fitnesstr-dev-7a4bc/c9d0c7c0-1616-11f0-adf8-02e3ef14f375",
+      "AmplifyAppId": "d2hq1bhx0b4sst"
+    },
+    "categories": {
+      "auth": {
+        "ssdp4300p01fitnesstrd467ca41": {}
+      }
+    }
+  }
+}
